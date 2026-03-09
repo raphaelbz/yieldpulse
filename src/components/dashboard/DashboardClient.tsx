@@ -36,9 +36,24 @@ export function DashboardClient() {
 
   return (
     <div className="min-h-screen flex flex-col">
+      {/* Page ambient glow — subtle green at top, invisible without close inspection */}
+      <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
+        <div className="absolute inset-x-0 -top-64 h-[600px] bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,rgba(34,197,94,0.06),transparent)]" />
+      </div>
+
       <Navbar />
 
-      <main className="flex-1 mx-auto w-full max-w-[1400px] px-4 sm:px-6 lg:px-8 py-6 space-y-6 animate-fade-in">
+      <main className="relative z-10 flex-1 mx-auto w-full max-w-[1400px] px-4 sm:px-6 lg:px-8 py-8 space-y-8 animate-fade-in">
+
+        {/* Page header */}
+        <div>
+          <h1 className="text-xl font-semibold text-white tracking-tight">Yield Markets</h1>
+          <p className="text-sm text-zinc-500 mt-0.5">
+            {isLoading
+              ? "Loading pools…"
+              : `${totalPools.toLocaleString()} pools across DeFi`}
+          </p>
+        </div>
 
         {/* API error banner */}
         {isError && <ApiErrorBanner onRetry={refetch} />}

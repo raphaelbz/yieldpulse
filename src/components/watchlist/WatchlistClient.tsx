@@ -48,8 +48,8 @@ function exportCSV(pools: Pool[]) {
 
 function WatchlistEmpty() {
   return (
-    <div className="rounded-xl border border-zinc-800 bg-zinc-900 flex flex-col items-center justify-center py-24 text-center px-4">
-      <div className="rounded-full bg-zinc-800 p-4 mb-4">
+    <div className="rounded-xl border border-white/[0.07] bg-[#111113] flex flex-col items-center justify-center py-24 text-center px-4">
+      <div className="rounded-full bg-white/[0.05] border border-white/[0.08] p-4 mb-4">
         <Star className="h-8 w-8 text-zinc-600" />
       </div>
       <h2 className="text-lg font-semibold text-white mb-2">Your watchlist is empty</h2>
@@ -91,7 +91,7 @@ function WatchlistStats({ pools }: { pools: Pool[] }) {
         { label: "Best APY", value: formatAPY(stats.bestApy) },
         { label: "Combined TVL", value: formatTVL(stats.totalTvl) },
       ].map(({ label, value }) => (
-        <div key={label} className="rounded-lg border border-zinc-800 bg-zinc-900 px-4 py-3">
+        <div key={label} className="rounded-lg border border-white/[0.07] bg-[#111113] px-4 py-3">
           <p className="text-xs text-zinc-500 uppercase tracking-wide mb-1">{label}</p>
           <p className="text-lg font-bold font-mono tabular-nums text-white">{value}</p>
         </div>
@@ -120,9 +120,12 @@ export function WatchlistClient() {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
+        <div className="absolute inset-x-0 -top-64 h-[600px] bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,rgba(251,191,36,0.04),transparent)]" />
+      </div>
       <Navbar />
 
-      <main className="flex-1 mx-auto w-full max-w-[1400px] px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+      <main className="relative z-10 flex-1 mx-auto w-full max-w-[1400px] px-4 sm:px-6 lg:px-8 py-8 space-y-8">
 
         {/* Header */}
         <div className="flex items-center justify-between flex-wrap gap-3">
@@ -144,7 +147,7 @@ export function WatchlistClient() {
               variant="outline"
               size="sm"
               onClick={() => exportCSV(watchedPools)}
-              className="h-8 border-zinc-700 bg-zinc-900 text-zinc-300 hover:text-white text-xs"
+              className="h-8 border-white/[0.08] bg-[#111113] text-zinc-300 hover:text-white text-xs"
             >
               <Download className="h-3.5 w-3.5 mr-1.5" />
               Export CSV

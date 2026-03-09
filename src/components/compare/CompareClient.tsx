@@ -76,10 +76,13 @@ export function CompareClient({ initialPoolIds }: CompareClientProps) {
   const isLoading = isAnyLoading || isPoolsLoading
 
   return (
-    <div className="min-h-screen bg-zinc-950 flex flex-col">
+    <div className="min-h-screen flex flex-col">
+      <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
+        <div className="absolute inset-x-0 -top-64 h-[600px] bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,rgba(34,197,94,0.06),transparent)]" />
+      </div>
       <Navbar />
 
-      <main className="flex-1 max-w-7xl mx-auto w-full px-4 py-8 space-y-6">
+      <main className="relative z-10 flex-1 max-w-7xl mx-auto w-full px-4 py-8 space-y-8">
         {/* Header */}
         <div className="flex items-center justify-between gap-4 flex-wrap">
           <div>
@@ -121,7 +124,7 @@ export function CompareClient({ initialPoolIds }: CompareClientProps) {
               return (
                 <div
                   key={pool.pool}
-                  className="flex items-center gap-2 rounded-full border border-zinc-700 bg-zinc-900 px-3 py-1 text-xs"
+                  className="flex items-center gap-2 rounded-full border border-white/[0.08] bg-[#111113] px-3 py-1 text-xs"
                 >
                   <span
                     className="inline-block h-2 w-2 rounded-full shrink-0"

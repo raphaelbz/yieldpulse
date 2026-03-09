@@ -15,64 +15,39 @@ interface StatCardProps {
   accent?: "green" | "blue" | "amber"
 }
 
-const ACCENT_COLORS = {
-  green: {
-    icon: "text-green-400 bg-green-500/[0.08] border-green-500/[0.15]",
-    glow: "from-green-500/[0.12] via-green-500/[0.04]",
-    top: "from-green-500/40",
-  },
-  blue: {
-    icon: "text-blue-400 bg-blue-500/[0.08] border-blue-500/[0.15]",
-    glow: "from-blue-500/[0.08] via-blue-500/[0.03]",
-    top: "from-blue-500/40",
-  },
-  amber: {
-    icon: "text-amber-400 bg-amber-500/[0.08] border-amber-500/[0.15]",
-    glow: "from-amber-500/[0.08] via-amber-500/[0.03]",
-    top: "from-amber-500/40",
-  },
+const ACCENT = {
+  green: { icon: "text-green-400", bg: "bg-green-500/[0.08]", border: "border-green-500/[0.12]" },
+  blue:  { icon: "text-blue-400",  bg: "bg-blue-500/[0.08]",  border: "border-blue-500/[0.12]"  },
+  amber: { icon: "text-amber-400", bg: "bg-amber-500/[0.08]", border: "border-amber-500/[0.12]" },
 }
 
 function StatCard({ label, value, sub, icon, accent = "green" }: StatCardProps) {
-  const colors = ACCENT_COLORS[accent]
+  const a = ACCENT[accent]
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.025] p-5 transition-all duration-300 hover:bg-white/[0.04] hover:border-white/[0.1] group">
-      {/* Gradient top border glow */}
-      <div className={cn(
-        "absolute top-0 left-[15%] right-[15%] h-px bg-gradient-to-r to-transparent",
-        colors.top, "via-transparent"
-      )} />
-      {/* Subtle corner radial glow */}
-      <div className={cn(
-        "absolute -top-8 -right-8 h-24 w-24 rounded-full bg-gradient-radial to-transparent blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500",
-        colors.glow
-      )} />
-
-      <div className="relative flex items-start justify-between gap-3">
-        <div className="flex-1 min-w-0">
-          <p className="text-[11px] font-medium text-zinc-500 uppercase tracking-widest mb-2">{label}</p>
-          <p className="text-2xl font-bold font-mono tabular-nums text-white leading-none">{value}</p>
-          {sub && <p className="text-xs text-zinc-600 mt-1.5">{sub}</p>}
-        </div>
-        <div className={cn("rounded-xl border p-2.5 shrink-0", colors.icon)}>
-          <div className="h-4 w-4 [&>svg]:h-4 [&>svg]:w-4">{icon}</div>
+    <div className="rounded-2xl border border-white/[0.07] bg-[#111113] p-5 transition-colors duration-200 hover:bg-[#141416] hover:border-white/[0.1]">
+      <div className="flex items-center justify-between mb-4">
+        <p className="text-[11px] font-semibold text-zinc-500 uppercase tracking-[0.08em]">{label}</p>
+        <div className={cn("rounded-xl border p-2 shrink-0", a.bg, a.border)}>
+          <div className={cn("h-3.5 w-3.5 [&>svg]:h-3.5 [&>svg]:w-3.5", a.icon)}>{icon}</div>
         </div>
       </div>
+      <p className="text-[28px] font-bold font-mono tabular-nums text-white leading-none tracking-tight">
+        {value}
+      </p>
+      {sub && <p className="text-[11px] text-zinc-600 mt-2 leading-tight">{sub}</p>}
     </div>
   )
 }
 
 function StatCardSkeleton() {
   return (
-    <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5">
-      <div className="flex items-start justify-between gap-3">
-        <div className="flex-1 space-y-2.5">
-          <Skeleton className="h-2.5 w-20 bg-white/[0.06]" />
-          <Skeleton className="h-7 w-28 bg-white/[0.06]" />
-          <Skeleton className="h-2.5 w-16 bg-white/[0.04]" />
-        </div>
-        <Skeleton className="h-10 w-10 rounded-xl bg-white/[0.06]" />
+    <div className="rounded-2xl border border-white/[0.06] bg-[#111113] p-5">
+      <div className="flex items-center justify-between mb-4">
+        <Skeleton className="h-2.5 w-20 bg-white/[0.06]" />
+        <Skeleton className="h-9 w-9 rounded-xl bg-white/[0.05]" />
       </div>
+      <Skeleton className="h-7 w-28 bg-white/[0.07]" />
+      <Skeleton className="h-2.5 w-16 bg-white/[0.04] mt-2.5" />
     </div>
   )
 }
@@ -111,31 +86,31 @@ export function StatsOverview({ pools, isLoading, filteredCount }: StatsOverview
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 stagger-children">
       <StatCard
-        label="Total TVL tracked"
+        label="Total TVL"
         value={formatTVL(stats.totalTvl)}
         sub={`${filteredCount.toLocaleString()} pools tracked`}
-        icon={<Database className="h-4 w-4" />}
+        icon={<Database />}
         accent="blue"
       />
       <StatCard
         label="Highest APY"
         value={formatAPY(stats.highestApyAll)}
         sub="Excluding outliers"
-        icon={<TrendingUp className="h-4 w-4" />}
+        icon={<TrendingUp />}
         accent="green"
       />
       <StatCard
-        label="Best stable APY"
+        label="Best Stable APY"
         value={formatAPY(stats.highestApyStable)}
         sub="Stablecoin pools"
-        icon={<DollarSign className="h-4 w-4" />}
+        icon={<DollarSign />}
         accent="green"
       />
       <StatCard
-        label="Avg stable APY"
+        label="Avg Stable APY"
         value={formatAPY(stats.avgStableApy)}
         sub="TVL > $1M"
-        icon={<Activity className="h-4 w-4" />}
+        icon={<Activity />}
         accent="amber"
       />
     </div>

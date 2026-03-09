@@ -300,9 +300,9 @@ export function FilterBar({
       )}
 
       <Button
-        variant="outline"
+        variant="ghost"
         size="sm"
-        className="h-8 border-zinc-700 bg-zinc-900 text-zinc-300 hover:bg-zinc-800 text-xs"
+        className="h-8 border border-white/[0.08] bg-white/[0.04] text-zinc-400 hover:text-white hover:bg-white/[0.07] text-xs rounded-xl px-3"
       >
         <SlidersHorizontal className="h-3.5 w-3.5 mr-1.5" />
         More

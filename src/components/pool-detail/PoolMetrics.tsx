@@ -16,7 +16,7 @@ interface MetricCellProps {
 
 function MetricCell({ label, value, sub, className }: MetricCellProps) {
   return (
-    <div className={cn("rounded-lg border border-zinc-800 bg-zinc-900/50 p-4", className)}>
+    <div className={cn("rounded-lg border border-white/[0.07] bg-[#111113]/50 p-4", className)}>
       <p className="text-xs text-zinc-500 uppercase tracking-wide font-medium mb-1.5">{label}</p>
       <div className="text-sm font-mono tabular-nums">{value}</div>
       {sub && <p className="text-xs text-zinc-600 mt-1">{sub}</p>}
@@ -151,7 +151,7 @@ export function PoolMetricsSkeleton() {
       <Skeleton className="h-4 w-28 bg-zinc-800" />
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
         {Array.from({ length: 16 }).map((_, i) => (
-          <div key={i} className="rounded-lg border border-zinc-800 bg-zinc-900/50 p-4 space-y-2">
+          <div key={i} className="rounded-lg border border-white/[0.07] bg-[#111113]/50 p-4 space-y-2">
             <Skeleton className="h-3 w-20 bg-zinc-800" />
             <Skeleton className="h-5 w-16 bg-zinc-800" />
           </div>

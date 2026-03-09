@@ -189,7 +189,7 @@ interface CompareTableProps {
 
 export function CompareTable({ pools, onRemove }: CompareTableProps) {
   return (
-    <div className="rounded-xl border border-zinc-800 bg-zinc-900 overflow-x-auto">
+    <div className="rounded-xl border border-white/[0.07] bg-[#111113] overflow-x-auto">
       <table className="w-full border-collapse">
         <thead>
           <tr className="border-b border-zinc-800">
@@ -219,7 +219,7 @@ export function CompareTable({ pools, onRemove }: CompareTableProps) {
             return (
               <tr
                 key={row.label}
-                className="border-b border-zinc-800/50 last:border-0 hover:bg-zinc-800/20 transition-colors"
+                className="border-b border-white/[0.04] last:border-0 hover:bg-white/[0.03] transition-colors"
               >
                 {/* Label */}
                 <td className="p-4 text-xs text-zinc-500 font-medium align-middle whitespace-nowrap">
@@ -265,7 +265,7 @@ export function CompareTable({ pools, onRemove }: CompareTableProps) {
 
 export function CompareTableSkeleton({ count }: { count: number }) {
   return (
-    <div className="rounded-xl border border-zinc-800 bg-zinc-900 overflow-hidden">
+    <div className="rounded-xl border border-white/[0.07] bg-[#111113] overflow-hidden">
       <div className="flex border-b border-zinc-800 p-4 gap-4">
         <Skeleton className="h-5 w-24 bg-zinc-800" />
         {Array.from({ length: count }).map((_, i) => (
@@ -278,7 +278,7 @@ export function CompareTableSkeleton({ count }: { count: number }) {
         ))}
       </div>
       {Array.from({ length: 8 }).map((_, i) => (
-        <div key={i} className="flex border-b border-zinc-800/50 p-4 gap-4 items-center">
+        <div key={i} className="flex border-b border-white/[0.04] p-4 gap-4 items-center">
           <Skeleton className="h-3 w-20 bg-zinc-800" />
           {Array.from({ length: count }).map((_, j) => (
             <Skeleton key={j} className="flex-1 h-5 bg-zinc-800" />

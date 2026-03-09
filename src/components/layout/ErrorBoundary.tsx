@@ -31,7 +31,7 @@ export class ErrorBoundary extends React.Component<
 
       return (
         <div className="min-h-screen bg-zinc-950 flex items-center justify-center px-4">
-          <div className="max-w-md w-full rounded-2xl border border-zinc-800 bg-zinc-900 p-8 text-center space-y-4">
+          <div className="max-w-md w-full rounded-2xl border border-white/[0.07] bg-[#111113] p-8 text-center space-y-4">
             <div className="flex justify-center">
               <div className="rounded-full bg-red-500/10 p-4">
                 <AlertOctagon className="h-8 w-8 text-red-400" />

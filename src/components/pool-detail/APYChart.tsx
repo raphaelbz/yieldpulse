@@ -53,7 +53,7 @@ function CustomTooltip({
     : ""
 
   return (
-    <div className="rounded-lg border border-zinc-700 bg-zinc-900/95 p-3 shadow-xl backdrop-blur-sm text-xs">
+    <div className="rounded-lg border border-white/[0.08] bg-[#111113]/95 p-3 shadow-xl backdrop-blur-sm text-xs">
       <p className="text-zinc-400 mb-2 font-medium">{date}</p>
       {payload.map((entry) => (
         <div key={entry.name} className="flex items-center justify-between gap-4">
@@ -100,7 +100,7 @@ export function APYChart({ data, isLoading }: APYChartProps) {
   if (isLoading) return <ChartSkeleton label="APY History" />
 
   return (
-    <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-5">
+    <div className="rounded-xl border border-white/[0.07] bg-[#111113] p-5">
       <div className="flex items-center justify-between mb-5">
         <h2 className="text-sm font-semibold text-zinc-400 uppercase tracking-wide">APY History</h2>
         <TimeRangeToggle value={timeRange} onChange={setTimeRange} />
@@ -220,7 +220,7 @@ export function TVLChart({ data, isLoading }: TVLChartProps) {
   if (isLoading) return <ChartSkeleton label="TVL History" />
 
   return (
-    <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-5">
+    <div className="rounded-xl border border-white/[0.07] bg-[#111113] p-5">
       <div className="flex items-center justify-between mb-5">
         <h2 className="text-sm font-semibold text-zinc-400 uppercase tracking-wide">TVL History</h2>
         <TimeRangeToggle value={timeRange} onChange={setTimeRange} />
@@ -324,12 +324,12 @@ function TimeRangeToggle({
 
 function ChartSkeleton({ label }: { label: string }) {
   return (
-    <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-5">
+    <div className="rounded-xl border border-white/[0.07] bg-[#111113] p-5">
       <div className="flex items-center justify-between mb-5">
         <Skeleton className="h-4 w-28 bg-zinc-800" />
         <Skeleton className="h-7 w-36 bg-zinc-800" />
       </div>
-      <Skeleton className="h-64 w-full bg-zinc-800/50 rounded-lg" />
+      <Skeleton className="h-64 w-full bg-[#1a1a1c]/50 rounded-lg" />
     </div>
   )
 }

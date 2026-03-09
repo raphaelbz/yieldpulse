@@ -14,7 +14,7 @@ function HistoryRow({ entry }: { entry: AlertHistoryEntry }) {
   const dateStr = date.toLocaleDateString("en-US", { month: "short", day: "numeric" })
 
   return (
-    <div className="flex items-start gap-3 py-3 border-b border-zinc-800/50 last:border-0">
+    <div className="flex items-start gap-3 py-3 border-b border-white/[0.04] last:border-0">
       {/* Time */}
       <div className="shrink-0 text-right min-w-[56px]">
         <p className="text-xs font-mono text-zinc-500">{timeStr}</p>
@@ -67,7 +67,7 @@ export function AlertHistory() {
         )}
       </div>
 
-      <div className="rounded-xl border border-zinc-800 bg-zinc-900">
+      <div className="rounded-xl border border-white/[0.07] bg-[#111113]">
         {alertHistory.length === 0 ? (
           <div className="py-10 text-center">
             <History className="h-6 w-6 text-zinc-700 mx-auto mb-2" />

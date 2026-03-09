@@ -118,6 +118,9 @@
   }
   html {
     @apply font-sans;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 
   /* JetBrains Mono for all financial/numerical values */
@@ -127,35 +130,16 @@
   }
 }
 
-/* ─── Premium Design Tokens ───────────────────────────────── */
+/* ─── Surface System ──────────────────────────────────────── */
+/* Replaces glassmorphism — solid, elevated, Apple-like */
 :root {
-  --glass-bg:       rgba(255,255,255,0.025);
-  --glass-hover:    rgba(255,255,255,0.04);
-  --glass-border:   rgba(255,255,255,0.07);
-  --glass-border-hi: rgba(255,255,255,0.12);
-  --shadow-card:    0 0 0 1px rgba(255,255,255,0.04), 0 4px 24px rgba(0,0,0,0.4);
-  --shadow-float:   0 0 0 1px rgba(255,255,255,0.06), 0 8px 40px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.06);
-}
-
-/* Glass utility */
-.glass {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-}
-.glass:hover {
-  background: var(--glass-hover);
-}
-
-/* Gradient border top line (accent glow on card top) */
-.card-glow-top::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 8%; right: 8%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, oklch(0.723 0.2 142.495 / 0.5), transparent);
-  border-radius: 1px;
+  --surface-0: #09090b;   /* page background */
+  --surface-1: #111113;   /* cards, panels */
+  --surface-2: #141416;   /* card hover */
+  --surface-3: #1a1a1c;   /* elevated elements */
+  --border-subtle: rgba(255,255,255,0.06);
+  --border-default: rgba(255,255,255,0.08);
+  --border-strong: rgba(255,255,255,0.14);
 }
 
 /* ─── Animations ──────────────────────────────────────────── */

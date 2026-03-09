@@ -25,7 +25,7 @@ export function CompareBar() {
 
   return (
     <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-40 w-full max-w-3xl px-4 animate-slide-up">
-    <div className="flex items-center gap-3 rounded-2xl border border-white/[0.1] bg-zinc-950/90 backdrop-blur-2xl shadow-[0_0_0_1px_rgba(255,255,255,0.04),0_-4px_40px_rgba(0,0,0,0.6),inset_0_1px_0_rgba(255,255,255,0.06)] px-4 py-3">
+    <div className="flex items-center gap-3 rounded-2xl border border-white/[0.1] bg-[#000000]/90 backdrop-blur-2xl shadow-[0_0_0_1px_rgba(255,255,255,0.04),0_-4px_40px_rgba(0,0,0,0.6),inset_0_1px_0_rgba(255,255,255,0.06)] px-4 py-3">
       <GitCompare className="h-4 w-4 text-green-400 shrink-0" />
       <span className="text-sm font-medium text-zinc-300 shrink-0">
         Compare ({compareSelection.length}/4)

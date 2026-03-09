@@ -12,7 +12,7 @@ function TopYieldCard({ pool, rank }: { pool: Pool; rank: number }) {
   return (
     <Link
       href={`/pool/${pool.pool}`}
-      className="group flex-none w-44 relative rounded-2xl border border-white/[0.07] bg-[#111113] p-4 transition-colors duration-200 hover:bg-[#141416] hover:border-white/[0.12]"
+      className="group flex-none w-44 relative rounded-2xl border border-white/[0.07] bg-[#1c1c1e] p-4 transition-colors duration-200 hover:bg-[#2c2c2e] hover:border-white/[0.12]"
     >
       {/* Rank */}
       <span className="absolute top-3.5 right-3.5 text-[10px] font-mono text-zinc-700 tabular-nums">
@@ -49,7 +49,7 @@ function TopYieldCard({ pool, rank }: { pool: Pool; rank: number }) {
 
 function TopYieldCardSkeleton() {
   return (
-    <div className="flex-none w-44 rounded-2xl border border-white/[0.06] bg-[#111113] p-4">
+    <div className="flex-none w-44 rounded-2xl border border-white/[0.06] bg-[#1c1c1e] p-4">
       <div className="flex items-center gap-2 mb-3">
         <Skeleton className="h-4 w-4 rounded-full bg-white/[0.06]" />
         <Skeleton className="h-2.5 w-16 bg-white/[0.05]" />
@@ -87,7 +87,7 @@ export function TopYieldsBar({ pools, isLoading }: { pools: Pool[]; isLoading: b
               ))}
         </div>
         {/* Right edge fade */}
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-[#09090b] to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-[#000000] to-transparent" />
       </div>
     </div>
   )

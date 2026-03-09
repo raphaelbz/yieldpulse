@@ -39,8 +39,8 @@ function AlertCard({ alert }: { alert: Alert }) {
     <div className={cn(
       "rounded-xl border p-4 flex items-start gap-4 transition-colors",
       alert.enabled
-        ? "border-white/[0.07] bg-[#111113]"
-        : "border-white/[0.04] bg-[#111113]/40 opacity-60"
+        ? "border-white/[0.07] bg-[#1c1c1e]"
+        : "border-white/[0.04] bg-[#1c1c1e]/40 opacity-60"
     )}>
       {/* Icon */}
       <div className="shrink-0 mt-0.5 rounded-lg bg-zinc-800 p-2">
@@ -114,7 +114,7 @@ export function AlertList() {
 
   if (alerts.length === 0) {
     return (
-      <div className="rounded-xl border border-white/[0.07] bg-[#111113] py-12 text-center">
+      <div className="rounded-xl border border-white/[0.07] bg-[#1c1c1e] py-12 text-center">
         <BellOff className="h-8 w-8 text-zinc-600 mx-auto mb-3" />
         <p className="text-zinc-400 text-sm font-medium">No alerts yet</p>
         <p className="text-zinc-600 text-xs mt-1">Create your first alert above</p>

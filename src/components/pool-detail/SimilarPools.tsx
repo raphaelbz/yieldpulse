@@ -47,7 +47,7 @@ function SimilarPoolCard({ pool, currentPoolId }: { pool: Pool; currentPoolId: s
     <Link
       href={`/pool/${pool.pool}`}
       className={cn(
-        "rounded-xl border border-white/[0.07] bg-[#111113] p-4 flex flex-col gap-3",
+        "rounded-xl border border-white/[0.07] bg-[#1c1c1e] p-4 flex flex-col gap-3",
         "hover:border-green-500/30 hover:bg-zinc-800/60 transition-all duration-150",
         isCurrent && "border-green-500/40 bg-green-500/5 pointer-events-none"
       )}
@@ -94,7 +94,7 @@ function SimilarPoolCard({ pool, currentPoolId }: { pool: Pool; currentPoolId: s
 
 function SimilarPoolSkeleton() {
   return (
-    <div className="rounded-xl border border-white/[0.07] bg-[#111113] p-4 space-y-3">
+    <div className="rounded-xl border border-white/[0.07] bg-[#1c1c1e] p-4 space-y-3">
       <div className="flex items-center gap-2">
         <Skeleton className="h-5 w-5 rounded-md bg-zinc-800" />
         <Skeleton className="h-3 w-24 bg-zinc-800" />
@@ -137,7 +137,7 @@ export function SimilarPools({ pool, allPools, isLoading }: SimilarPoolsProps) {
           {Array.from({ length: 6 }).map((_, i) => <SimilarPoolSkeleton key={i} />)}
         </div>
       ) : similar.length === 0 ? (
-        <div className="rounded-xl border border-white/[0.07] bg-[#111113] py-10 text-center text-sm text-zinc-600">
+        <div className="rounded-xl border border-white/[0.07] bg-[#1c1c1e] py-10 text-center text-sm text-zinc-600">
           No similar pools found
         </div>
       ) : (

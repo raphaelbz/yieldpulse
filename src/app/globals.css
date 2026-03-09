@@ -7,8 +7,9 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist);
-  --font-mono: var(--font-geist-mono);
+  /* SF Pro on macOS/iOS, Segoe UI on Windows — literally the OS font */
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Fira Code", monospace;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -49,41 +50,40 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-/* YieldPulse dark theme — zinc-950 base, green accents */
+/* Apple dark mode color system */
 :root {
-  /* zinc-950 = #09090b */
-  --background: oklch(0.09 0.003 264);
-  --foreground: oklch(0.985 0 0);
+  /* Pure black — Apple's dark mode system background */
+  --background: #000000;
+  --foreground: #ffffff;
 
-  /* zinc-900 = #18181b */
-  --card: oklch(0.148 0.003 264);
-  --card-foreground: oklch(0.985 0 0);
+  /* Apple's systemGroupedBackground dark = #1c1c1e */
+  --card: #1c1c1e;
+  --card-foreground: #ffffff;
 
-  --popover: oklch(0.148 0.003 264);
-  --popover-foreground: oklch(0.985 0 0);
+  --popover: #1c1c1e;
+  --popover-foreground: #ffffff;
 
   /* green-500 accent */
   --primary: oklch(0.723 0.2 142.495);
-  --primary-foreground: oklch(0.09 0 0);
+  --primary-foreground: #000000;
 
-  /* zinc-800 */
-  --secondary: oklch(0.21 0.003 264);
-  --secondary-foreground: oklch(0.985 0 0);
+  /* Apple's secondarySystemFill */
+  --secondary: #2c2c2e;
+  --secondary-foreground: #ffffff;
 
-  /* zinc-800 */
-  --muted: oklch(0.21 0.003 264);
-  --muted-foreground: oklch(0.62 0 0);
+  /* Apple's tertiarySystemFill */
+  --muted: #3a3a3c;
+  --muted-foreground: rgba(235,235,245,0.6);
 
-  /* zinc-800 subtle */
-  --accent: oklch(0.24 0.003 264);
-  --accent-foreground: oklch(0.985 0 0);
+  --accent: #2c2c2e;
+  --accent-foreground: #ffffff;
 
-  /* red-500 */
+  /* red */
   --destructive: oklch(0.637 0.237 25.331);
 
-  /* zinc-800 border */
-  --border: oklch(0.21 0.003 264);
-  --input: oklch(0.21 0.003 264);
+  /* Apple separator dark = rgba(255,255,255,0.15) */
+  --border: rgba(255,255,255,0.12);
+  --input: #2c2c2e;
   --ring: oklch(0.723 0.2 142.495);
 
   /* Chart colors — green theme for APY data */
@@ -95,13 +95,13 @@
 
   --radius: 0.5rem;
 
-  --sidebar: oklch(0.12 0.003 264);
-  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar: #1c1c1e;
+  --sidebar-foreground: #ffffff;
   --sidebar-primary: oklch(0.723 0.2 142.495);
-  --sidebar-primary-foreground: oklch(0.09 0 0);
-  --sidebar-accent: oklch(0.21 0.003 264);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(0.21 0.003 264);
+  --sidebar-primary-foreground: #000000;
+  --sidebar-accent: #2c2c2e;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: rgba(255,255,255,0.12);
   --sidebar-ring: oklch(0.723 0.2 142.495);
 
   /* YieldPulse custom */
@@ -123,23 +123,22 @@
     text-rendering: optimizeLegibility;
   }
 
-  /* Geist Mono for all financial/numerical values */
+  /* SF Mono on macOS for all financial/numerical values */
   .font-mono,
   .tabular-nums {
-    font-family: var(--font-geist-mono), ui-monospace, monospace;
+    font-family: ui-monospace, "SF Mono", "Cascadia Code", "Fira Code", monospace;
   }
 }
 
-/* ─── Surface System ──────────────────────────────────────── */
-/* Replaces glassmorphism — solid, elevated, Apple-like */
+/* ─── Apple Surface System ────────────────────────────────── */
 :root {
-  --surface-0: #09090b;   /* page background */
-  --surface-1: #111113;   /* cards, panels */
-  --surface-2: #141416;   /* card hover */
-  --surface-3: #1a1a1c;   /* elevated elements */
-  --border-subtle: rgba(255,255,255,0.06);
-  --border-default: rgba(255,255,255,0.08);
-  --border-strong: rgba(255,255,255,0.14);
+  --surface-0: #000000;   /* page — Apple systemBackground dark */
+  --surface-1: #1c1c1e;   /* cards — Apple systemGroupedBackground dark */
+  --surface-2: #2c2c2e;   /* hover — Apple secondarySystemFill */
+  --surface-3: #3a3a3c;   /* active — Apple tertiarySystemFill */
+  --border-subtle: rgba(255,255,255,0.08);
+  --border-default: rgba(255,255,255,0.12);
+  --border-strong: rgba(255,255,255,0.18);
 }
 
 /* ─── Animations ──────────────────────────────────────────── */
@@ -191,12 +190,12 @@
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: oklch(0.12 0.003 264);
+  background: #000000;
 }
 ::-webkit-scrollbar-thumb {
-  background: oklch(0.3 0.003 264);
+  background: #3a3a3c;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: oklch(0.4 0.003 264);
+  background: #48484a;
 }

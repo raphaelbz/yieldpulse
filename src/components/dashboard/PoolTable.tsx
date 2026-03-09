@@ -182,7 +182,7 @@ function PoolRow({ pool }: { pool: Pool }) {
 
 function TableSkeleton() {
   return (
-    <div className="rounded-2xl border border-white/[0.06] bg-[#0d0d0f] overflow-hidden">
+    <div className="rounded-2xl border border-white/[0.06] bg-[#000000] overflow-hidden">
       <div className="grid gap-4 px-4 py-3.5 border-b border-white/[0.05]" style={{ gridTemplateColumns: GRID }}>
         {COLUMNS.map((col) => <Skeleton key={col.key} className="h-2.5 w-12 bg-white/[0.06]" />)}
       </div>
@@ -206,7 +206,7 @@ function TableSkeleton() {
 
 function EmptyState({ onReset }: { onReset: () => void }) {
   return (
-    <div className="rounded-2xl border border-white/[0.07] bg-[#0d0d0f] flex flex-col items-center justify-center py-20 text-center">
+    <div className="rounded-2xl border border-white/[0.07] bg-[#000000] flex flex-col items-center justify-center py-20 text-center">
       <div className="h-12 w-12 rounded-2xl bg-white/[0.04] border border-white/[0.06] flex items-center justify-center mb-4">
         <ChevronsUpDown className="h-5 w-5 text-zinc-600" />
       </div>
@@ -240,10 +240,10 @@ export function PoolTable({ pools, isLoading, onReset }: PoolTableProps) {
   if (!pools.length) return <EmptyState onReset={onReset} />
 
   return (
-    <div className="rounded-2xl border border-white/[0.07] bg-[#0d0d0f] overflow-hidden">
+    <div className="rounded-2xl border border-white/[0.07] bg-[#000000] overflow-hidden">
       {/* Header */}
       <div
-        className="grid gap-4 px-4 py-3.5 border-b border-white/[0.05] bg-[#111113]/50"
+        className="grid gap-4 px-4 py-3.5 border-b border-white/[0.05] bg-[#1c1c1e]/50"
         style={{ gridTemplateColumns: GRID }}
         role="row"
       >

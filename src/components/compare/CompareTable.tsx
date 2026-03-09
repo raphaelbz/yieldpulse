@@ -189,7 +189,7 @@ interface CompareTableProps {
 
 export function CompareTable({ pools, onRemove }: CompareTableProps) {
   return (
-    <div className="rounded-xl border border-white/[0.07] bg-[#111113] overflow-x-auto">
+    <div className="rounded-xl border border-white/[0.07] bg-[#1c1c1e] overflow-x-auto">
       <table className="w-full border-collapse">
         <thead>
           <tr className="border-b border-zinc-800">
@@ -265,7 +265,7 @@ export function CompareTable({ pools, onRemove }: CompareTableProps) {
 
 export function CompareTableSkeleton({ count }: { count: number }) {
   return (
-    <div className="rounded-xl border border-white/[0.07] bg-[#111113] overflow-hidden">
+    <div className="rounded-xl border border-white/[0.07] bg-[#1c1c1e] overflow-hidden">
       <div className="flex border-b border-zinc-800 p-4 gap-4">
         <Skeleton className="h-5 w-24 bg-zinc-800" />
         {Array.from({ length: count }).map((_, i) => (

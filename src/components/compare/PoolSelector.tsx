@@ -58,7 +58,7 @@ export function PoolSelector({ selectedIds, onAdd, disabled = false }: PoolSelec
   return (
     <div ref={containerRef} className="relative">
       <div className={cn(
-        "flex items-center gap-2 rounded-xl border border-white/[0.08] bg-[#111113] px-3 py-2.5 transition-colors",
+        "flex items-center gap-2 rounded-xl border border-white/[0.08] bg-[#1c1c1e] px-3 py-2.5 transition-colors",
         isOpen && "border-green-500/50",
         disabled && "opacity-40 cursor-not-allowed"
       )}>
@@ -84,7 +84,7 @@ export function PoolSelector({ selectedIds, onAdd, disabled = false }: PoolSelec
 
       {/* Dropdown */}
       {isOpen && results.length > 0 && (
-        <div className="absolute top-full mt-1.5 left-0 right-0 z-30 rounded-xl border border-white/[0.08] bg-[#111113] shadow-2xl overflow-hidden">
+        <div className="absolute top-full mt-1.5 left-0 right-0 z-30 rounded-xl border border-white/[0.08] bg-[#1c1c1e] shadow-2xl overflow-hidden">
           <div className="py-1">
             {results.map((pool) => (
               <button
@@ -132,7 +132,7 @@ export function PoolSelector({ selectedIds, onAdd, disabled = false }: PoolSelec
       )}
 
       {isOpen && query.trim().length >= 2 && results.length === 0 && (
-        <div className="absolute top-full mt-1.5 left-0 right-0 z-30 rounded-xl border border-white/[0.08] bg-[#111113] px-4 py-6 text-center shadow-2xl">
+        <div className="absolute top-full mt-1.5 left-0 right-0 z-30 rounded-xl border border-white/[0.08] bg-[#1c1c1e] px-4 py-6 text-center shadow-2xl">
           <p className="text-sm text-zinc-500">No pools found for &ldquo;{query}&rdquo;</p>
         </div>
       )}

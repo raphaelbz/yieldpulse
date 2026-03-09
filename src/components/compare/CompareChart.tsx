@@ -90,7 +90,7 @@ function CustomTooltip({
     : ""
 
   return (
-    <div className="rounded-lg border border-white/[0.08] bg-[#111113]/95 p-3 shadow-xl text-xs backdrop-blur-sm min-w-[180px]">
+    <div className="rounded-lg border border-white/[0.08] bg-[#1c1c1e]/95 p-3 shadow-xl text-xs backdrop-blur-sm min-w-[180px]">
       <p className="text-zinc-400 mb-2 font-medium">{date}</p>
       {payload.map((e) => (
         <div key={e.name} className="flex items-center justify-between gap-4 py-0.5">
@@ -128,18 +128,18 @@ export function CompareChart({ pools, chartDataList, isLoading }: CompareChartPr
 
   if (isLoading) {
     return (
-      <div className="rounded-xl border border-white/[0.07] bg-[#111113] p-5">
+      <div className="rounded-xl border border-white/[0.07] bg-[#1c1c1e] p-5">
         <div className="flex items-center justify-between mb-5">
           <Skeleton className="h-4 w-28 bg-zinc-800" />
           <Skeleton className="h-7 w-40 bg-zinc-800" />
         </div>
-        <Skeleton className="h-72 w-full bg-[#1a1a1c]/50 rounded-lg" />
+        <Skeleton className="h-72 w-full bg-[#2c2c2e]/50 rounded-lg" />
       </div>
     )
   }
 
   return (
-    <div className="rounded-xl border border-white/[0.07] bg-[#111113] p-5">
+    <div className="rounded-xl border border-white/[0.07] bg-[#1c1c1e] p-5">
       <div className="flex items-center justify-between mb-5">
         <h2 className="text-sm font-semibold text-zinc-400 uppercase tracking-wide">APY Comparison</h2>
         {/* Time range toggle */}

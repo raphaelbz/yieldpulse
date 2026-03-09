@@ -99,7 +99,7 @@ export function FilterBar({
             </Badge>
           )}
         </PopoverTrigger>
-        <PopoverContent className="w-64 p-3 border-white/[0.09] bg-zinc-950/95 backdrop-blur-xl" align="start">
+        <PopoverContent className="w-64 p-3 border-white/[0.09] bg-[#000000]/95 backdrop-blur-xl" align="start">
           <p className="text-[11px] font-medium text-zinc-600 mb-2 uppercase tracking-widest">Filter by Chain</p>
           <div className="space-y-0.5 max-h-64 overflow-y-auto">
             {chains.slice(0, 30).map((chain) => (
@@ -149,7 +149,7 @@ export function FilterBar({
             </Badge>
           )}
         </PopoverTrigger>
-        <PopoverContent className="w-64 p-3 border-white/[0.09] bg-zinc-950/95 backdrop-blur-xl" align="start">
+        <PopoverContent className="w-64 p-3 border-white/[0.09] bg-[#000000]/95 backdrop-blur-xl" align="start">
           <p className="text-[11px] font-medium text-zinc-600 mb-2 uppercase tracking-widest">Filter by Protocol</p>
           <div className="space-y-0.5 max-h-64 overflow-y-auto">
             {protocols.slice(0, 50).map((protocol) => (
@@ -188,7 +188,7 @@ export function FilterBar({
         <SelectTrigger className="h-8 w-32 border-white/[0.08] bg-white/[0.04] text-zinc-400 text-xs rounded-xl hover:bg-white/[0.07] transition-all">
           <SelectValue placeholder="Min TVL" />
         </SelectTrigger>
-        <SelectContent className="border-white/[0.09] bg-zinc-950/95 backdrop-blur-xl">
+        <SelectContent className="border-white/[0.09] bg-[#000000]/95 backdrop-blur-xl">
           {MIN_TVL_OPTIONS.map((opt) => (
             <SelectItem
               key={opt.value}
@@ -214,7 +214,7 @@ export function FilterBar({
             ? `${filters.apyMin}%–${filters.apyMax < 300 ? filters.apyMax + "%" : "∞"}`
             : "Range"}
         </PopoverTrigger>
-        <PopoverContent className="w-64 p-4 border-white/[0.09] bg-zinc-950/95 backdrop-blur-xl" align="start">
+        <PopoverContent className="w-64 p-4 border-white/[0.09] bg-[#000000]/95 backdrop-blur-xl" align="start">
           <p className="text-xs font-medium text-zinc-400 mb-4 uppercase tracking-wide">APY Range</p>
           <div className="flex justify-between text-xs text-zinc-400 mb-3">
             <span>Min: <span className="font-mono text-white">{filters.apyMin}%</span></span>

@@ -24,7 +24,7 @@ const ACCENT = {
 function StatCard({ label, value, sub, icon, accent = "green" }: StatCardProps) {
   const a = ACCENT[accent]
   return (
-    <div className="rounded-2xl border border-white/[0.07] bg-[#111113] p-5 transition-colors duration-200 hover:bg-[#141416] hover:border-white/[0.1]">
+    <div className="rounded-2xl border border-white/[0.07] bg-[#1c1c1e] p-5 transition-colors duration-200 hover:bg-[#2c2c2e] hover:border-white/[0.1]">
       <div className="flex items-center justify-between mb-4">
         <p className="text-[11px] font-semibold text-zinc-500 uppercase tracking-[0.08em]">{label}</p>
         <div className={cn("rounded-xl border p-2 shrink-0", a.bg, a.border)}>
@@ -41,7 +41,7 @@ function StatCard({ label, value, sub, icon, accent = "green" }: StatCardProps) 
 
 function StatCardSkeleton() {
   return (
-    <div className="rounded-2xl border border-white/[0.06] bg-[#111113] p-5">
+    <div className="rounded-2xl border border-white/[0.06] bg-[#1c1c1e] p-5">
       <div className="flex items-center justify-between mb-4">
         <Skeleton className="h-2.5 w-20 bg-white/[0.06]" />
         <Skeleton className="h-9 w-9 rounded-xl bg-white/[0.05]" />

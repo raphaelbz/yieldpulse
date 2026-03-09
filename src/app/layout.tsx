@@ -1,22 +1,11 @@
 import type { Metadata, Viewport } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
+// No next/font needed — we use the OS system font (SF Pro on Mac) via CSS
 import { Toaster } from "sonner"
 import { QueryProvider } from "@/components/providers/QueryProvider"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { ErrorBoundary } from "@/components/layout/ErrorBoundary"
 import "./globals.css"
 
-const geist = Geist({
-  variable: "--font-geist",
-  subsets: ["latin"],
-  display: "swap",
-})
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-  display: "swap",
-})
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://yieldpulse.rafb.tech"),
@@ -65,7 +54,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        className={`${geist.variable} ${geistMono.variable} antialiased min-h-screen bg-background text-foreground`}
+        className="antialiased min-h-screen bg-background text-foreground"
       >
         <ErrorBoundary>
           <QueryProvider>
@@ -79,9 +68,9 @@ export default function RootLayout({
           position="bottom-right"
           toastOptions={{
             style: {
-              background: "oklch(0.148 0.003 264)",
-              border: "1px solid oklch(0.21 0.003 264)",
-              color: "oklch(0.985 0 0)",
+              background: "#1c1c1e",
+              border: "1px solid rgba(255,255,255,0.12)",
+              color: "#ffffff",
             },
           }}
         />

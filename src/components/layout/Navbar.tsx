@@ -39,8 +39,8 @@ export function Navbar() {
         className={cn(
           "pointer-events-auto flex h-12 w-full max-w-5xl items-center justify-between gap-4 rounded-2xl px-4 transition-all duration-300",
           scrolled
-            ? "border border-white/[0.1] bg-[#09090b]/95 backdrop-blur-2xl shadow-[0_4px_24px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.06)]"
-            : "border border-white/[0.07] bg-[#111113]/80 backdrop-blur-xl"
+            ? "border border-white/[0.1] bg-[#000000]/95 backdrop-blur-2xl shadow-[0_4px_24px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.06)]"
+            : "border border-white/[0.07] bg-[#1c1c1e]/80 backdrop-blur-xl"
         )}
       >
         {/* Logo */}
@@ -102,7 +102,7 @@ export function Navbar() {
 
       {/* Mobile menu — drops below the pill */}
       {isMobileMenuOpen && (
-        <div className="pointer-events-auto absolute top-full left-4 right-4 mt-1 rounded-2xl border border-white/[0.09] bg-zinc-950/95 backdrop-blur-2xl shadow-[0_8px_40px_rgba(0,0,0,0.6)] p-3 space-y-1 animate-fade-in">
+        <div className="pointer-events-auto absolute top-full left-4 right-4 mt-1 rounded-2xl border border-white/[0.09] bg-[#000000]/95 backdrop-blur-2xl shadow-[0_8px_40px_rgba(0,0,0,0.6)] p-3 space-y-1 animate-fade-in">
           <div className="relative mb-2">
             <Search className="absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-zinc-600" />
             <input

@@ -67,7 +67,7 @@ export function AlertHistory() {
         )}
       </div>
 
-      <div className="rounded-xl border border-white/[0.07] bg-[#111113]">
+      <div className="rounded-xl border border-white/[0.07] bg-[#1c1c1e]">
         {alertHistory.length === 0 ? (
           <div className="py-10 text-center">
             <History className="h-6 w-6 text-zinc-700 mx-auto mb-2" />

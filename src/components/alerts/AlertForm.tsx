@@ -111,7 +111,7 @@ export function AlertForm() {
     : []
 
   return (
-    <div className="rounded-xl border border-white/[0.07] bg-[#111113]">
+    <div className="rounded-xl border border-white/[0.07] bg-[#1c1c1e]">
       <button
         onClick={() => setIsExpanded((v) => !v)}
         className="w-full flex items-center justify-between px-5 py-4 text-left"
@@ -142,7 +142,7 @@ export function AlertForm() {
                     "rounded-lg border p-3 text-left transition-colors",
                     type === opt.value
                       ? "border-green-500/50 bg-green-500/10 text-green-400"
-                      : "border-zinc-700 bg-[#1a1a1c]/50 text-zinc-400 hover:border-zinc-600 hover:text-zinc-300"
+                      : "border-zinc-700 bg-[#2c2c2e]/50 text-zinc-400 hover:border-zinc-600 hover:text-zinc-300"
                   )}
                 >
                   <p className="text-xs font-semibold">{opt.label}</p>
@@ -203,7 +203,7 @@ export function AlertForm() {
                     className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-600"
                   />
                   {poolResults.length > 0 && (
-                    <div className="absolute top-full mt-1 left-0 right-0 z-20 rounded-lg border border-white/[0.08] bg-[#111113] shadow-xl overflow-hidden">
+                    <div className="absolute top-full mt-1 left-0 right-0 z-20 rounded-lg border border-white/[0.08] bg-[#1c1c1e] shadow-xl overflow-hidden">
                       {poolResults.map((p) => (
                         <button
                           key={p.pool}

@@ -124,7 +124,7 @@ export function CompareClient({ initialPoolIds }: CompareClientProps) {
               return (
                 <div
                   key={pool.pool}
-                  className="flex items-center gap-2 rounded-full border border-white/[0.08] bg-[#111113] px-3 py-1 text-xs"
+                  className="flex items-center gap-2 rounded-full border border-white/[0.08] bg-[#1c1c1e] px-3 py-1 text-xs"
                 >
                   <span
                     className="inline-block h-2 w-2 rounded-full shrink-0"

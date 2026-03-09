@@ -49,7 +49,7 @@ export function PoolHeader({ pool }: PoolHeaderProps) {
       </Link>
 
       {/* Main header card */}
-      <div className="rounded-xl border border-white/[0.07] bg-[#111113] p-6">
+      <div className="rounded-xl border border-white/[0.07] bg-[#1c1c1e] p-6">
         <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
 
           {/* Left: Identity */}
@@ -175,7 +175,7 @@ export function PoolHeaderSkeleton() {
   return (
     <div className="space-y-4">
       <Skeleton className="h-8 w-36 bg-zinc-800" />
-      <div className="rounded-xl border border-white/[0.07] bg-[#111113] p-6">
+      <div className="rounded-xl border border-white/[0.07] bg-[#1c1c1e] p-6">
         <div className="flex items-start gap-4">
           <Skeleton className="h-12 w-12 rounded-xl bg-zinc-800 shrink-0" />
           <div className="flex-1 space-y-2">

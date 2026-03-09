@@ -24,7 +24,8 @@ export function CompareBar() {
   const compareUrl = `/compare?pools=${compareSelection.join(",")}`
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-zinc-700 bg-zinc-900/95 backdrop-blur-md px-4 py-3 flex items-center gap-3 animate-slide-up">
+    <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-40 w-full max-w-3xl px-4 animate-slide-up">
+    <div className="flex items-center gap-3 rounded-2xl border border-white/[0.1] bg-zinc-950/90 backdrop-blur-2xl shadow-[0_0_0_1px_rgba(255,255,255,0.04),0_-4px_40px_rgba(0,0,0,0.6),inset_0_1px_0_rgba(255,255,255,0.06)] px-4 py-3">
       <GitCompare className="h-4 w-4 text-green-400 shrink-0" />
       <span className="text-sm font-medium text-zinc-300 shrink-0">
         Compare ({compareSelection.length}/4)
@@ -34,7 +35,7 @@ export function CompareBar() {
         {selectedPools.map((pool) => (
           <div
             key={pool.pool}
-            className="flex items-center gap-1.5 bg-zinc-800 rounded-lg px-2.5 py-1.5 text-xs text-white shrink-0"
+            className="flex items-center gap-1.5 bg-white/[0.07] border border-white/[0.1] rounded-xl px-2.5 py-1.5 text-xs text-white shrink-0"
           >
             <ProtocolLogo project={pool.project} size={14} />
             <span className="font-medium">{pool.symbol}</span>
@@ -69,6 +70,7 @@ export function CompareBar() {
           Compare →
         </Link>
       </div>
+    </div>
     </div>
   )
 }

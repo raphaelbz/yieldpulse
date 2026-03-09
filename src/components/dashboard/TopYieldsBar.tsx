@@ -2,86 +2,65 @@
 
 import { useMemo } from "react"
 import Link from "next/link"
-import { TrendingUp } from "lucide-react"
 import { Skeleton } from "@/components/ui/skeleton"
 import { ChainLogo } from "@/components/ui/custom/ChainLogo"
 import { ProtocolLogo } from "@/components/ui/custom/ProtocolLogo"
 import { formatAPY, formatTVL, formatProtocolName } from "@/lib/formatters"
 import type { Pool } from "@/types"
-import { cn } from "@/lib/utils"
 
-interface TopYieldCardProps {
-  pool: Pool
-  rank: number
-}
-
-function TopYieldCard({ pool, rank }: TopYieldCardProps) {
+function TopYieldCard({ pool, rank }: { pool: Pool; rank: number }) {
   return (
     <Link
       href={`/pool/${pool.pool}`}
-      className={cn(
-        "flex-none w-52 rounded-xl border border-zinc-800 bg-zinc-900 p-4",
-        "hover:border-green-500/40 hover:bg-zinc-800/80 transition-all duration-150 cursor-pointer"
-      )}
+      className="group flex-none w-48 relative overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.025] p-4 transition-all duration-200 hover:bg-white/[0.05] hover:border-white/[0.12] hover:-translate-y-0.5 hover:shadow-[0_8px_32px_rgba(0,0,0,0.4)]"
     >
-      {/* Header */}
-      <div className="flex items-center justify-between mb-3">
-        <div className="flex items-center gap-2 min-w-0">
-          <ProtocolLogo project={pool.project} size={18} />
-          <span className="text-xs text-zinc-400 truncate">{formatProtocolName(pool.project)}</span>
-        </div>
-        <span className="text-xs font-mono text-zinc-600 shrink-0">#{rank}</span>
+      {/* Rank badge */}
+      <div className="absolute top-3 right-3 text-[10px] font-mono text-zinc-700">
+        #{rank}
       </div>
 
-      {/* Symbol + Chain */}
-      <div className="flex items-center justify-between mb-3">
-        <span className="text-sm font-semibold text-white truncate max-w-[7rem]">{pool.symbol}</span>
-        <ChainLogo chain={pool.chain} size={16} />
+      {/* Protocol logo + name */}
+      <div className="flex items-center gap-2 mb-3">
+        <ProtocolLogo project={pool.project} size={18} />
+        <span className="text-[11px] text-zinc-500 truncate">{formatProtocolName(pool.project)}</span>
       </div>
 
-      {/* APY */}
-      <div className="flex items-end justify-between">
-        <div>
-          <p className="text-xs text-zinc-500 mb-0.5">APY</p>
-          <p className="text-xl font-bold font-mono text-green-400">{formatAPY(pool.apy)}</p>
-        </div>
-        <div className="text-right">
-          <p className="text-xs text-zinc-500 mb-0.5">TVL</p>
-          <p className="text-sm font-mono text-zinc-300">{formatTVL(pool.tvlUsd)}</p>
-        </div>
+      {/* Token + chain */}
+      <div className="flex items-center justify-between mb-4">
+        <span className="text-sm font-semibold text-white truncate max-w-[6.5rem]">{pool.symbol}</span>
+        <ChainLogo chain={pool.chain} size={14} />
       </div>
+
+      {/* APY — big hero number */}
+      <div>
+        <p className="text-[10px] text-zinc-600 uppercase tracking-widest mb-0.5">APY</p>
+        <p className="text-2xl font-bold font-mono tabular-nums text-green-400 group-hover:text-green-300 transition-colors">
+          {formatAPY(pool.apy)}
+        </p>
+        <p className="text-[11px] font-mono text-zinc-600 mt-1">{formatTVL(pool.tvlUsd)} TVL</p>
+      </div>
+
+      {/* Bottom glow line */}
+      <div className="absolute bottom-0 left-[20%] right-[20%] h-px bg-gradient-to-r from-transparent via-green-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
     </Link>
   )
 }
 
 function TopYieldCardSkeleton() {
   return (
-    <div className="flex-none w-52 rounded-xl border border-zinc-800 bg-zinc-900 p-4">
+    <div className="flex-none w-48 rounded-2xl border border-white/[0.06] bg-white/[0.02] p-4">
       <div className="flex items-center gap-2 mb-3">
-        <Skeleton className="h-4 w-4 rounded-full bg-zinc-800" />
-        <Skeleton className="h-3 w-20 bg-zinc-800" />
+        <Skeleton className="h-4 w-4 rounded-full bg-white/[0.06]" />
+        <Skeleton className="h-2.5 w-16 bg-white/[0.06]" />
       </div>
-      <Skeleton className="h-4 w-24 bg-zinc-800 mb-3" />
-      <div className="flex items-end justify-between">
-        <div>
-          <Skeleton className="h-3 w-8 bg-zinc-800 mb-1" />
-          <Skeleton className="h-7 w-20 bg-zinc-800" />
-        </div>
-        <div>
-          <Skeleton className="h-3 w-8 bg-zinc-800 mb-1" />
-          <Skeleton className="h-5 w-16 bg-zinc-800" />
-        </div>
-      </div>
+      <Skeleton className="h-4 w-20 bg-white/[0.06] mb-4" />
+      <Skeleton className="h-2 w-6 bg-white/[0.04] mb-1" />
+      <Skeleton className="h-7 w-20 bg-white/[0.06]" />
     </div>
   )
 }
 
-interface TopYieldsBarProps {
-  pools: Pool[]
-  isLoading: boolean
-}
-
-export function TopYieldsBar({ pools, isLoading }: TopYieldsBarProps) {
+export function TopYieldsBar({ pools, isLoading }: { pools: Pool[]; isLoading: boolean }) {
   const topPools = useMemo(() => {
     return pools
       .filter((p) => p.stablecoin && p.apy !== null && !p.outlier && p.tvlUsd > 1_000_000)
@@ -92,13 +71,11 @@ export function TopYieldsBar({ pools, isLoading }: TopYieldsBarProps) {
   return (
     <div>
       <div className="flex items-center gap-2 mb-3">
-        <TrendingUp className="h-4 w-4 text-green-400" />
-        <h2 className="text-sm font-semibold text-zinc-400 uppercase tracking-wide">
+        <span className="text-[11px] font-medium text-zinc-500 uppercase tracking-widest">
           Top Stablecoin Yields
-        </h2>
+        </span>
       </div>
-
-      <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-thin">
+      <div className="flex gap-2.5 overflow-x-auto pb-1.5 scrollbar-thin">
         {isLoading
           ? Array.from({ length: 6 }).map((_, i) => <TopYieldCardSkeleton key={i} />)
           : topPools.map((pool, i) => (

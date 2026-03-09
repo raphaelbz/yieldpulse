@@ -79,7 +79,7 @@ export function FilterBar({
 
   // Trigger button base classes (mimic Button outline/sm without asChild)
   const triggerBase =
-    "inline-flex shrink-0 items-center justify-center rounded-lg border text-sm font-medium whitespace-nowrap transition-all h-8 px-2.5 text-xs gap-1 border-zinc-700 bg-zinc-900 text-zinc-300 hover:bg-zinc-800 hover:text-white cursor-pointer select-none focus-visible:outline-none"
+    "inline-flex shrink-0 items-center justify-center rounded-xl border text-sm font-medium whitespace-nowrap transition-all duration-150 h-8 px-3 text-xs gap-1.5 border-white/[0.08] bg-white/[0.04] text-zinc-400 hover:bg-white/[0.07] hover:text-white cursor-pointer select-none focus-visible:outline-none"
 
   return (
     <div className="flex flex-wrap items-center gap-2">
@@ -89,7 +89,7 @@ export function FilterBar({
         <PopoverTrigger
           className={cn(
             triggerBase,
-            filters.chains.length > 0 && "border-green-500/50 text-green-400"
+            filters.chains.length > 0 && "border-green-500/[0.3] text-green-400 bg-green-500/[0.06]"
           )}
         >
           Chain
@@ -99,18 +99,18 @@ export function FilterBar({
             </Badge>
           )}
         </PopoverTrigger>
-        <PopoverContent className="w-64 p-3 bg-zinc-900 border-zinc-700" align="start">
-          <p className="text-xs font-medium text-zinc-400 mb-2 uppercase tracking-wide">Filter by Chain</p>
+        <PopoverContent className="w-64 p-3 border-white/[0.09] bg-zinc-950/95 backdrop-blur-xl" align="start">
+          <p className="text-[11px] font-medium text-zinc-600 mb-2 uppercase tracking-widest">Filter by Chain</p>
           <div className="space-y-0.5 max-h-64 overflow-y-auto">
             {chains.slice(0, 30).map((chain) => (
               <button
                 key={chain}
                 onClick={() => toggleChain(chain)}
                 className={cn(
-                  "w-full flex items-center justify-between px-2 py-1.5 rounded-md text-sm transition-colors cursor-pointer",
+                  "w-full flex items-center justify-between px-2.5 py-1.5 rounded-xl text-sm transition-all duration-150 cursor-pointer",
                   filters.chains.includes(chain)
-                    ? "bg-green-500/10 text-green-400"
-                    : "text-zinc-300 hover:bg-zinc-800"
+                    ? "bg-green-500/[0.08] text-green-400"
+                    : "text-zinc-300 hover:bg-white/[0.05]"
                 )}
               >
                 <span className="flex items-center gap-2">
@@ -139,7 +139,7 @@ export function FilterBar({
         <PopoverTrigger
           className={cn(
             triggerBase,
-            filters.protocols.length > 0 && "border-green-500/50 text-green-400"
+            filters.protocols.length > 0 && "border-green-500/[0.3] text-green-400 bg-green-500/[0.06]"
           )}
         >
           Protocol
@@ -149,18 +149,18 @@ export function FilterBar({
             </Badge>
           )}
         </PopoverTrigger>
-        <PopoverContent className="w-64 p-3 bg-zinc-900 border-zinc-700" align="start">
-          <p className="text-xs font-medium text-zinc-400 mb-2 uppercase tracking-wide">Filter by Protocol</p>
+        <PopoverContent className="w-64 p-3 border-white/[0.09] bg-zinc-950/95 backdrop-blur-xl" align="start">
+          <p className="text-[11px] font-medium text-zinc-600 mb-2 uppercase tracking-widest">Filter by Protocol</p>
           <div className="space-y-0.5 max-h-64 overflow-y-auto">
             {protocols.slice(0, 50).map((protocol) => (
               <button
                 key={protocol}
                 onClick={() => toggleProtocol(protocol)}
                 className={cn(
-                  "w-full flex items-center gap-2 px-2 py-1.5 rounded-md text-sm transition-colors text-left cursor-pointer",
+                  "w-full flex items-center gap-2 px-2.5 py-1.5 rounded-xl text-sm transition-all duration-150 text-left cursor-pointer",
                   filters.protocols.includes(protocol)
-                    ? "bg-green-500/10 text-green-400"
-                    : "text-zinc-300 hover:bg-zinc-800"
+                    ? "bg-green-500/[0.08] text-green-400"
+                    : "text-zinc-300 hover:bg-white/[0.05]"
                 )}
               >
                 {formatProtocolName(protocol)}
@@ -185,15 +185,15 @@ export function FilterBar({
         value={String(filters.minTvl)}
         onValueChange={(v) => setFilter("minTvl", Number(v) as MinTvlOption)}
       >
-        <SelectTrigger className="h-8 w-32 border-zinc-700 bg-zinc-900 text-zinc-300 text-xs">
+        <SelectTrigger className="h-8 w-32 border-white/[0.08] bg-white/[0.04] text-zinc-400 text-xs rounded-xl hover:bg-white/[0.07] transition-all">
           <SelectValue placeholder="Min TVL" />
         </SelectTrigger>
-        <SelectContent className="bg-zinc-900 border-zinc-700">
+        <SelectContent className="border-white/[0.09] bg-zinc-950/95 backdrop-blur-xl">
           {MIN_TVL_OPTIONS.map((opt) => (
             <SelectItem
               key={opt.value}
               value={String(opt.value)}
-              className="text-zinc-300 text-xs focus:bg-zinc-800 focus:text-white"
+              className="text-zinc-300 text-xs focus:bg-white/[0.06] focus:text-white"
             >
               TVL ≥ {opt.label}
             </SelectItem>
@@ -206,7 +206,7 @@ export function FilterBar({
         <PopoverTrigger
           className={cn(
             triggerBase,
-            (filters.apyMin > 0 || filters.apyMax < 300) && "border-green-500/50 text-green-400"
+            (filters.apyMin > 0 || filters.apyMax < 300) && "border-green-500/[0.3] text-green-400 bg-green-500/[0.06]"
           )}
         >
           APY{" "}
@@ -214,7 +214,7 @@ export function FilterBar({
             ? `${filters.apyMin}%–${filters.apyMax < 300 ? filters.apyMax + "%" : "∞"}`
             : "Range"}
         </PopoverTrigger>
-        <PopoverContent className="w-64 p-4 bg-zinc-900 border-zinc-700" align="start">
+        <PopoverContent className="w-64 p-4 border-white/[0.09] bg-zinc-950/95 backdrop-blur-xl" align="start">
           <p className="text-xs font-medium text-zinc-400 mb-4 uppercase tracking-wide">APY Range</p>
           <div className="flex justify-between text-xs text-zinc-400 mb-3">
             <span>Min: <span className="font-mono text-white">{filters.apyMin}%</span></span>
@@ -237,31 +237,31 @@ export function FilterBar({
       </Popover>
 
       {/* ── Toggles ── */}
-      <label className="inline-flex items-center gap-1.5 border border-zinc-700 rounded-lg px-3 h-8 bg-zinc-900 cursor-pointer">
+      <label className="inline-flex items-center gap-1.5 border border-white/[0.08] rounded-xl px-3 h-8 bg-white/[0.04] hover:bg-white/[0.07] transition-all duration-150 cursor-pointer">
         <Switch
           checked={filters.stablecoinOnly}
           onCheckedChange={(v) => setFilter("stablecoinOnly", v)}
           className="h-4 w-7 data-[state=checked]:bg-green-500"
         />
-        <span className="text-xs text-zinc-400 select-none">Stables</span>
+        <span className="text-xs text-zinc-500 select-none">Stables</span>
       </label>
 
-      <label className="inline-flex items-center gap-1.5 border border-zinc-700 rounded-lg px-3 h-8 bg-zinc-900 cursor-pointer">
+      <label className="inline-flex items-center gap-1.5 border border-white/[0.08] rounded-xl px-3 h-8 bg-white/[0.04] hover:bg-white/[0.07] transition-all duration-150 cursor-pointer">
         <Switch
           checked={filters.singleExposureOnly}
           onCheckedChange={(v) => setFilter("singleExposureOnly", v)}
           className="h-4 w-7 data-[state=checked]:bg-green-500"
         />
-        <span className="text-xs text-zinc-400 select-none">No IL</span>
+        <span className="text-xs text-zinc-500 select-none">No IL</span>
       </label>
 
-      <label className="inline-flex items-center gap-1.5 border border-zinc-700 rounded-lg px-3 h-8 bg-zinc-900 cursor-pointer">
+      <label className="inline-flex items-center gap-1.5 border border-white/[0.08] rounded-xl px-3 h-8 bg-white/[0.04] hover:bg-white/[0.07] transition-all duration-150 cursor-pointer">
         <Switch
           checked={filters.excludeOutliers}
           onCheckedChange={(v) => setFilter("excludeOutliers", v)}
           className="h-4 w-7 data-[state=checked]:bg-green-500"
         />
-        <span className="text-xs text-zinc-400 select-none">No outliers</span>
+        <span className="text-xs text-zinc-500 select-none">No outliers</span>
       </label>
 
       {/* Spacer */}

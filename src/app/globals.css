@@ -127,15 +127,46 @@
   }
 }
 
+/* ─── Premium Design Tokens ───────────────────────────────── */
+:root {
+  --glass-bg:       rgba(255,255,255,0.025);
+  --glass-hover:    rgba(255,255,255,0.04);
+  --glass-border:   rgba(255,255,255,0.07);
+  --glass-border-hi: rgba(255,255,255,0.12);
+  --shadow-card:    0 0 0 1px rgba(255,255,255,0.04), 0 4px 24px rgba(0,0,0,0.4);
+  --shadow-float:   0 0 0 1px rgba(255,255,255,0.06), 0 8px 40px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+/* Glass utility */
+.glass {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+.glass:hover {
+  background: var(--glass-hover);
+}
+
+/* Gradient border top line (accent glow on card top) */
+.card-glow-top::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 8%; right: 8%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, oklch(0.723 0.2 142.495 / 0.5), transparent);
+  border-radius: 1px;
+}
+
 /* ─── Animations ──────────────────────────────────────────── */
 
 @keyframes fade-in-up {
-  from { opacity: 0; transform: translateY(8px); }
+  from { opacity: 0; transform: translateY(10px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes slide-up {
-  from { opacity: 0; transform: translateY(20px); }
+  from { opacity: 0; transform: translateY(24px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
@@ -144,17 +175,17 @@
   to   { opacity: 1; }
 }
 
-@keyframes number-flash {
-  0%   { color: oklch(0.792 0.175 143); }
-  100% { color: inherit; }
+@keyframes shimmer-slide {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(100%); }
 }
 
 .animate-fade-in {
-  animation: fade-in-up 0.35s ease-out both;
+  animation: fade-in-up 0.4s cubic-bezier(0.16,1,0.3,1) both;
 }
 
 .animate-slide-up {
-  animation: slide-up 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: slide-up 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .animate-fade {
@@ -163,12 +194,12 @@
 
 /* Stagger children */
 .stagger-children > * {
-  animation: fade-in-up 0.35s ease-out both;
+  animation: fade-in-up 0.4s cubic-bezier(0.16,1,0.3,1) both;
 }
 .stagger-children > *:nth-child(1) { animation-delay: 0ms; }
-.stagger-children > *:nth-child(2) { animation-delay: 50ms; }
-.stagger-children > *:nth-child(3) { animation-delay: 100ms; }
-.stagger-children > *:nth-child(4) { animation-delay: 150ms; }
+.stagger-children > *:nth-child(2) { animation-delay: 60ms; }
+.stagger-children > *:nth-child(3) { animation-delay: 120ms; }
+.stagger-children > *:nth-child(4) { animation-delay: 180ms; }
 
 /* Custom scrollbar for dark theme */
 ::-webkit-scrollbar {

@@ -7,6 +7,7 @@
 //   4. Fallback                                      → protocol homepage, then DefiLlama
 // ============================================================
 
+import { getCreate2Address, keccak256, encodeAbiParameters, parseAbiParameters, getAddress } from "viem"
 import type { Pool } from "@/types"
 
 const CHAIN_SLUG: Record<string, string> = {
@@ -107,6 +108,40 @@ function parseFee(poolMeta: string | null): number | null {
   return bps > 0 ? bps : null
 }
 
+// Uniswap V3 factory (same address on Ethereum, Arbitrum, Optimism, Polygon, Base, etc.)
+const UNI_V3_FACTORY = "0x1F98431c8aD98523631AE4a59f267346ea31F984"
+const UNI_V3_INIT_CODE_HASH = "0xe34f199b19b2b4f47f68442619d555527d244f78a3297ea89325f843f87b8b54"
+
+/**
+ * Deterministically compute a Uniswap V3 pool address from its two tokens and fee tier.
+ * Uses CREATE2: keccak256(0xff + factory + salt + initCodeHash)[12:]
+ * where salt = keccak256(abi.encode(token0, token1, fee)) with token0 < token1.
+ */
+function computeUniV3PoolAddress(
+  tokenA: string,
+  tokenB: string,
+  fee: number,
+): string | null {
+  try {
+    const [t0, t1] = tokenA.toLowerCase() < tokenB.toLowerCase()
+      ? [tokenA, tokenB]
+      : [tokenB, tokenA]
+    const salt = keccak256(
+      encodeAbiParameters(
+        parseAbiParameters("address, address, uint24"),
+        [getAddress(t0), getAddress(t1), fee],
+      ),
+    )
+    return getCreate2Address({
+      from: UNI_V3_FACTORY,
+      salt,
+      bytecodeHash: UNI_V3_INIT_CODE_HASH,
+    })
+  } catch {
+    return null
+  }
+}
+
 /**
  * Returns the best possible direct URL for depositing / providing liquidity
  * into a specific pool. Never returns an empty string.
@@ -120,11 +155,19 @@ export function getPoolDirectUrl(pool: Pool): string {
   const tok1      = underlyingTokens?.[1]
 
   // ── Uniswap V3 ─────────────────────────────────────────────────────
-  // When pid is an EVM address → explore/pools deep link (most reliable).
-  // When pid is a UUID         → explore/pools/{chain} (the /add route in the
-  //   new Uniswap interface crashes on many token combinations via redirects.js).
+  // When pid is an EVM address → direct explore/pools deep link.
+  // When pid is a UUID → compute the pool contract address deterministically
+  //   via CREATE2(factory, keccak256(abi.encode(token0, token1, fee)), initCodeHash).
   if (project === "uniswap-v3") {
     if (isAddr) return `https://app.uniswap.org/explore/pools/${chainSlug}/${pid}`
+    if (tok0 && tok1) {
+      const fee = parseFee(poolMeta)
+      const validFee = fee && [100, 500, 3000, 10000].includes(fee) ? fee : null
+      if (validFee) {
+        const computed = computeUniV3PoolAddress(tok0, tok1, validFee)
+        if (computed) return `https://app.uniswap.org/explore/pools/${chainSlug}/${computed}`
+      }
+    }
     return `https://app.uniswap.org/explore/pools/${chainSlug}`
   }
 

@@ -13,7 +13,7 @@ import { ProtocolLogo } from "@/components/ui/custom/ProtocolLogo"
 import { RiskBadge } from "@/components/ui/custom/RiskBadge"
 import { formatTVL, formatProtocolName } from "@/lib/formatters"
 import { computeRiskScore } from "@/lib/risk"
-import { getPoolDirectUrl } from "@/lib/protocolUrls"
+import { usePoolDirectUrl } from "@/hooks/usePoolDirectUrl"
 import { useAppStore } from "@/store/useAppStore"
 import type { Pool } from "@/types"
 import { cn } from "@/lib/utils"
@@ -30,6 +30,7 @@ export function PoolHeader({ pool }: PoolHeaderProps) {
   const addToCompare = useAppStore((s) => s.addToCompare)
   const removeFromCompare = useAppStore((s) => s.removeFromCompare)
 
+  const poolUrl = usePoolDirectUrl(pool)
   const isWatched = watchlist.includes(pool.pool)
   const isCompared = compareSelection.includes(pool.pool)
   const canCompare = compareSelection.length < 4 || isCompared
@@ -139,7 +140,7 @@ export function PoolHeader({ pool }: PoolHeaderProps) {
             {/* Action buttons */}
             <div className="flex items-center gap-2">
               <a
-                href={getPoolDirectUrl(pool)}
+                href={poolUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={cn(

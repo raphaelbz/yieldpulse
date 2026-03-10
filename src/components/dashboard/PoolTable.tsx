@@ -14,7 +14,7 @@ import { ChainLogo } from "@/components/ui/custom/ChainLogo"
 import { ProtocolLogo } from "@/components/ui/custom/ProtocolLogo"
 import { computeRiskScore } from "@/lib/risk"
 import { formatTVL, formatProtocolName } from "@/lib/formatters"
-import { getPoolDirectUrl } from "@/lib/protocolUrls"
+import { usePoolDirectUrl } from "@/hooks/usePoolDirectUrl"
 import { useAppStore, selectSort, selectCompare } from "@/store/useAppStore"
 import type { Pool, SortField } from "@/types"
 import { cn } from "@/lib/utils"
@@ -79,6 +79,7 @@ function SortHeader({ col }: { col: Column }) {
 
 function PoolRow({ pool }: { pool: Pool }) {
   const router = useRouter()
+  const poolUrl = usePoolDirectUrl(pool)
   const watchlist = useAppStore((s) => s.watchlist)
   const addToWatchlist = useAppStore((s) => s.addToWatchlist)
   const removeFromWatchlist = useAppStore((s) => s.removeFromWatchlist)
@@ -141,7 +142,7 @@ function PoolRow({ pool }: { pool: Pool }) {
             onClick={(e) => e.stopPropagation()}
           >
             <a
-              href={getPoolDirectUrl(pool)}
+              href={poolUrl}
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}

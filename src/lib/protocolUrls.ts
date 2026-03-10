@@ -354,9 +354,10 @@ export function getPoolDirectUrl(pool: Pool): string {
     return "https://app.compound.finance/"
 
   // ── Curve ───────────────────────────────────────────────────────────────
-  // Pool addresses not derivable from tokens alone (multiple pool versions)
+  // Resolved async via usePoolDirectUrl hook (Curve Finance API lookup).
+  // This sync fallback is only used as initial render before the hook resolves.
   if (project === "curve" || project === "curve-dex")
-    return `https://curve.fi/#/${chainSlug}/pools`
+    return `https://www.curve.finance/dex/${chainSlug}/pools`
 
   // ── Balancer V2 / V3 ────────────────────────────────────────────────────
   if (project === "balancer-v2" || project === "balancer-v3")

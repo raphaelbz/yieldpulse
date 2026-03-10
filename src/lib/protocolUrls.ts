@@ -120,26 +120,17 @@ export function getPoolDirectUrl(pool: Pool): string {
   const tok1      = underlyingTokens?.[1]
 
   // ── Uniswap V3 ─────────────────────────────────────────────────────
-  // pid can be a contract address OR a UUID.
-  // With address → explore/pools deep link.
-  // With tokens + fee → /add/{tok0}/{tok1}/{fee} (NO ?chain param — breaks Uniswap router).
-  // Fee must be one of the four official Uniswap V3 tiers.
+  // When pid is an EVM address → explore/pools deep link (most reliable).
+  // When pid is a UUID         → explore/pools/{chain} (the /add route in the
+  //   new Uniswap interface crashes on many token combinations via redirects.js).
   if (project === "uniswap-v3") {
     if (isAddr) return `https://app.uniswap.org/explore/pools/${chainSlug}/${pid}`
-    if (tok0 && tok1) {
-      const fee = parseFee(poolMeta)
-      const validFee = fee && [100, 500, 3000, 10000].includes(fee) ? fee : null
-      return validFee
-        ? `https://app.uniswap.org/add/${tok0}/${tok1}/${validFee}`
-        : `https://app.uniswap.org/add/${tok0}/${tok1}`
-    }
     return `https://app.uniswap.org/explore/pools/${chainSlug}`
   }
 
   // ── Uniswap V2 ─────────────────────────────────────────────────────
   if (project === "uniswap-v2") {
     if (isAddr) return `https://app.uniswap.org/explore/pools/${chainSlug}/${pid}`
-    if (tok0 && tok1) return `https://app.uniswap.org/add/v2/${tok0}/${tok1}`
     return `https://app.uniswap.org/explore/pools/${chainSlug}`
   }
 

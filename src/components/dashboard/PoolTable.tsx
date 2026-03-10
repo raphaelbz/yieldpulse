@@ -14,6 +14,7 @@ import { ChainLogo } from "@/components/ui/custom/ChainLogo"
 import { ProtocolLogo } from "@/components/ui/custom/ProtocolLogo"
 import { computeRiskScore } from "@/lib/risk"
 import { formatTVL, formatProtocolName } from "@/lib/formatters"
+import { getProtocolUrl, hasDirectUrl } from "@/lib/protocolUrls"
 import { useAppStore, selectSort, selectCompare } from "@/store/useAppStore"
 import type { Pool, SortField } from "@/types"
 import { cn } from "@/lib/utils"
@@ -140,7 +141,7 @@ function PoolRow({ pool }: { pool: Pool }) {
             onClick={(e) => e.stopPropagation()}
           >
             <a
-              href={`https://defillama.com/yields/pool/${pool.pool}`}
+              href={getProtocolUrl(pool.project, pool.pool)}
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}
@@ -149,7 +150,9 @@ function PoolRow({ pool }: { pool: Pool }) {
               <ExternalLink className="h-3.5 w-3.5" />
             </a>
           </TooltipTrigger>
-          <TooltipContent side="top">View on DefiLlama</TooltipContent>
+          <TooltipContent side="top">
+            {hasDirectUrl(pool.project) ? `Deposit on ${formatProtocolName(pool.project)}` : "View on DefiLlama"}
+          </TooltipContent>
         </Tooltip>
 
         <Tooltip>

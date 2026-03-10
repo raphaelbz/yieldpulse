@@ -13,7 +13,7 @@ import { ProtocolLogo } from "@/components/ui/custom/ProtocolLogo"
 import { RiskBadge } from "@/components/ui/custom/RiskBadge"
 import { formatTVL, formatProtocolName } from "@/lib/formatters"
 import { computeRiskScore } from "@/lib/risk"
-import { getProtocolUrl, hasDirectUrl } from "@/lib/protocolUrls"
+import { getPoolDirectUrl } from "@/lib/protocolUrls"
 import { useAppStore } from "@/store/useAppStore"
 import type { Pool } from "@/types"
 import { cn } from "@/lib/utils"
@@ -139,7 +139,7 @@ export function PoolHeader({ pool }: PoolHeaderProps) {
             {/* Action buttons */}
             <div className="flex items-center gap-2">
               <a
-                href={getProtocolUrl(pool.project, pool.pool)}
+                href={getPoolDirectUrl(pool)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={cn(
@@ -148,7 +148,7 @@ export function PoolHeader({ pool }: PoolHeaderProps) {
                 )}
               >
                 <ExternalLink className="h-3.5 w-3.5 mr-1.5" />
-                {hasDirectUrl(pool.project) ? "Deposit" : "DefiLlama"}
+                Pool
               </a>
 
               <Button

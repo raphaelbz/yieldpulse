@@ -1,200 +1,369 @@
-// Direct deposit/app URLs for each protocol slug from DefiLlama
-// Fallback is the DefiLlama pool page when no direct URL is known.
+// ============================================================
+// Direct deep-link URLs to specific pools on each protocol.
+// Takes the full Pool object to build precise URLs using
+// pool address, chain, and underlying token addresses.
+// Falls back to DefiLlama when no deep link is possible.
+// ============================================================
 
-const PROTOCOL_URLS: Record<string, string> = {
-  // ── Lending / Money Markets ──────────────────────────────────────────
-  "aave-v3":                "https://app.aave.com/",
-  "aave-v2":                "https://app.aave.com/",
-  "aave-v1":                "https://app.aave.com/",
-  "compound-v3":            "https://app.compound.finance/",
-  "compound-v2":            "https://app.compound.finance/",
-  "spark":                  "https://app.spark.fi/",
-  "morpho":                 "https://app.morpho.org/",
-  "morpho-blue":            "https://app.morpho.org/",
-  "morpho-aave-v3":         "https://app.morpho.org/",
-  "morpho-aave-v2":         "https://app.morpho.org/",
-  "morpho-compound":        "https://app.morpho.org/",
-  "euler":                  "https://app.euler.finance/",
-  "euler-v2":               "https://app.euler.finance/",
-  "venus":                  "https://app.venus.io/markets",
-  "benqi":                  "https://app.benqi.fi/markets",
-  "radiant-v2":             "https://app.radiant.capital/",
-  "radiant-v1":             "https://app.radiant.capital/",
-  "ironbank":               "https://app.ib.xyz/",
-  "cream":                  "https://app.cream.finance/",
-  "silo-finance":           "https://app.silo.finance/",
-  "silo-v2":                "https://app.silo.finance/",
-  "notional-v2":            "https://notional.finance/",
-  "notional-v3":            "https://notional.finance/",
-  "exactly":                "https://exact.ly/",
-  "ionic-protocol":         "https://app.ionic.money/",
-  "seamless-protocol":      "https://app.seamlessprotocol.com/",
-  "dolomite":               "https://app.dolomite.io/",
-  "gearbox":                "https://app.gearbox.fi/",
-  "clearpool":              "https://clearpool.finance/",
-  "maple":                  "https://app.maple.finance/",
-  "goldfinch":              "https://app.goldfinch.finance/earn",
-  "sturdy":                 "https://v2.sturdy.finance/",
-  "fluid":                  "https://fluid.instadapp.io/",
-  "lendle":                 "https://lendle.xyz/",
-  "mendi-finance":          "https://mendi.finance/",
-  "moonwell":               "https://moonwell.fi/discover",
-  "granary":                "https://granary.finance/",
-  "wepiggy":                "https://wepiggy.com/",
-  "uwu-lend":               "https://uwulend.fi/",
-  "fraxlend":               "https://app.frax.finance/fraxlend",
-  "blur-lending":           "https://blur.io/lending",
-  "pac-finance":            "https://www.pac.finance/",
-  "colend":                 "https://app.colend.xyz/",
+import type { Pool } from "@/types"
 
-  // ── Liquid Staking ──────────────────────────────────────────────────
-  "lido":                   "https://stake.lido.fi/",
-  "rocket-pool":            "https://stake.rocketpool.net/",
-  "frax-ether":             "https://app.frax.finance/frxeth/mint",
-  "stader":                 "https://www.staderlabs.com/eth/stake/",
-  "ankr":                   "https://www.ankr.com/staking/stake/",
-  "stakewise-v3":           "https://app.stakewise.io/",
-  "stakewise":              "https://app.stakewise.io/",
-  "swell":                  "https://app.swellnetwork.io/stake",
-  "mantle-staking":         "https://mantlenetwork.io/stake",
-  "ether.fi":               "https://app.ether.fi/stake",
-  "renzo":                  "https://app.renzoprotocol.com/stake",
-  "puffer-finance":         "https://app.puffer.fi/restake",
-  "kelp-dao":               "https://app.kelpdao.xyz/restake/",
-  "eigenlayer":             "https://app.eigenlayer.xyz/",
-  "dinero":                 "https://www.dinero.xyz/",
-  "meta-pool":              "https://metapool.app/stake",
+// Chain name → slug used in most app URLs
+const CHAIN_SLUG: Record<string, string> = {
+  "Ethereum":    "ethereum",
+  "Arbitrum":    "arbitrum",
+  "Optimism":    "optimism",
+  "Polygon":     "polygon",
+  "Base":        "base",
+  "Avalanche":   "avalanche",
+  "BNB":         "bnb",
+  "BSC":         "bnb",
+  "Fantom":      "fantom",
+  "Gnosis":      "gnosis",
+  "Celo":        "celo",
+  "Moonbeam":    "moonbeam",
+  "Moonriver":   "moonriver",
+  "Kava":        "kava",
+  "Metis":       "metis",
+  "zkSync Era":  "zksync-era",
+  "Linea":       "linea",
+  "Scroll":      "scroll",
+  "Mantle":      "mantle",
+  "Blast":       "blast",
+  "Mode":        "mode",
+  "Manta":       "manta",
+  "Cronos":      "cronos",
+}
 
-  // ── DEX / AMM / Liquidity ────────────────────────────────────────────
-  "uniswap-v3":             "https://app.uniswap.org/pool",
-  "uniswap-v2":             "https://app.uniswap.org/pool",
-  "curve":                  "https://curve.fi/#/ethereum/pools",
-  "curve-dex":              "https://curve.fi/#/ethereum/pools",
-  "balancer":               "https://app.balancer.fi/",
-  "balancer-v2":            "https://app.balancer.fi/",
-  "sushiswap":              "https://app.sushi.com/pool",
-  "pancakeswap":            "https://pancakeswap.finance/liquidity",
-  "pancakeswap-v3":         "https://pancakeswap.finance/liquidity",
-  "camelot":                "https://app.camelot.exchange/liquidity",
-  "camelot-v3":             "https://app.camelot.exchange/liquidity",
-  "velodrome-v2":           "https://app.velodrome.finance/deposit",
-  "velodrome":              "https://app.velodrome.finance/deposit",
-  "aerodrome":              "https://aerodrome.finance/deposit",
-  "thena":                  "https://www.thena.fi/liquidity",
-  "ramses-v2":              "https://www.ramses.exchange/liquidity",
-  "ramses":                 "https://www.ramses.exchange/liquidity",
-  "solidly-v3":             "https://solidly.com/liquidity",
-  "maverick":               "https://app.mav.xyz/",
-  "maverick-v2":            "https://app.mav.xyz/",
-  "kyberswap":              "https://kyberswap.com/pools",
-  "kyberswap-elastic":      "https://kyberswap.com/pools",
-  "trader-joe":             "https://traderjoexyz.com/pool",
-  "trader-joe-v2":          "https://traderjoexyz.com/pool",
-  "wombat-exchange":        "https://app.wombat.exchange/pool",
-  "orca":                   "https://www.orca.so/pools",
-  "raydium":                "https://raydium.io/liquidity/",
-  "ambient-finance":        "https://ambient.finance/",
-  "nile":                   "https://www.nile.build/liquidity",
-  "sterling":               "https://www.sterlingprotocol.com/",
-  "swapbased":              "https://swapbased.finance/#/pool",
-  "chronos":                "https://app.chronos.exchange/liquidity",
-  "synthswap":              "https://synthswap.io/pool",
-  "solidly":                "https://solidly.com/liquidity",
-  "equalizer":              "https://equalizer.exchange/liquidity",
-  "scale":                  "https://www.scaledex.xyz/liquidity",
-  "cleopatra":              "https://www.cleopatra.exchange/liquidity",
-  "cleo-exchange":          "https://www.cleopatra.exchange/liquidity",
-  "fenix":                  "https://www.fenixfinance.io/liquidity",
-  "dragonswap":             "https://dragonswap.app/pool",
-  "kim":                    "https://app.kim.exchange/pool",
-  "lynex":                  "https://app.lynex.fi/liquidity",
-  "retro":                  "https://retro.finance/liquidity",
-  "pearl":                  "https://www.pearl.exchange/liquidity",
-  "stableswap":             "https://stableswap.finance/",
+// Chain name → numeric chain ID (EIP-155)
+const CHAIN_ID: Record<string, number> = {
+  "Ethereum":   1,
+  "Arbitrum":   42161,
+  "Optimism":   10,
+  "Polygon":    137,
+  "Base":       8453,
+  "Avalanche":  43114,
+  "BNB":        56,
+  "BSC":        56,
+  "Fantom":     250,
+  "Gnosis":     100,
+  "Celo":       42220,
+  "Metis":      1088,
+  "zkSync Era": 324,
+  "Linea":      59144,
+  "Scroll":     534352,
+  "Mantle":     5000,
+  "Blast":      81457,
+  "Mode":       34443,
+  "Moonbeam":   1284,
+  "Moonriver":  1285,
+}
 
-  // ── Yield Optimizers / Vaults ────────────────────────────────────────
-  "yearn-finance":          "https://yearn.fi/vaults",
-  "beefy":                  "https://app.beefy.com/",
-  "convex-finance":         "https://www.convexfinance.com/stake",
-  "concentrator":           "https://concentrator.aladdin.club/",
-  "aura":                   "https://app.aura.finance/",
-  "harvest-finance":        "https://app.harvest.finance/",
-  "badger-dao":             "https://app.badger.com/vaults",
-  "idle":                   "https://app.idle.finance/",
-  "origin-dollar":          "https://app.ousd.com/",
-  "origin-ether":           "https://app.oeth.com/",
-  "overnight-fi":           "https://overnight.fi/app/arbitrum/earn",
-  "extra-finance":          "https://app.extrafi.io/farm",
-  "gmd-protocol":           "https://gmd.io/vault",
-  "jones-dao":              "https://jonesdao.io/vaults",
-  "plutus-dao":             "https://app.plutusdao.io/vaults",
-  "dopex":                  "https://app.dopex.io/",
-  "ribbon-finance":         "https://app.ribbon.finance/v2/theta-vaults",
-  "factor":                 "https://app.factor.fi/",
-  "pendle":                 "https://app.pendle.finance/trade/pools",
-  "pirex-eth":              "https://pirex.io/",
-  "dinamo":                 "https://app.dinamo.fi/",
-  "cian":                   "https://cian.app/",
-  "equilibria":             "https://equilibria.fi/pool",
+// Aave market name suffix per chain (used in reserve-overview URLs)
+const AAVE_MARKET: Record<string, string> = {
+  "Ethereum":   "mainnet",
+  "Arbitrum":   "arbitrum",
+  "Optimism":   "optimism",
+  "Polygon":    "polygon",
+  "Avalanche":  "avalanche",
+  "Base":       "base",
+  "BNB":        "bnb",
+  "Gnosis":     "gnosis",
+  "Scroll":     "scroll",
+  "Metis":      "metis",
+  "zkSync Era": "zksync",
+}
 
-  // ── Cross-chain / Bridge Liquidity ───────────────────────────────────
-  "stargate":               "https://stargate.finance/pool",
-  "stargate-v2":            "https://stargate.finance/pool",
-  "hop-protocol":           "https://app.hop.exchange/#/pool",
-  "across-protocol":        "https://across.to/pool",
-  "synapse":                "https://synapseprotocol.com/pools",
-  "multichain":             "https://app.multichain.org/",
-  "celer":                  "https://cbridge.celer.network/liquidity",
+function s(chain: string): string {
+  return CHAIN_SLUG[chain] ?? chain.toLowerCase().replace(/\s+/g, "-")
+}
 
-  // ── Perps / Structured Products ─────────────────────────────────────
-  "gmx":                    "https://app.gmx.io/#/earn",
-  "gmx-v2":                 "https://app.gmx.io/#/earn",
-  "gains-network":          "https://gains.trade/vaults",
-  "kwenta":                 "https://kwenta.eth.limo/earn",
-  "synthetix":              "https://staking.synthetix.io/pools",
-  "lyra-finance":           "https://app.lyra.finance/vaults",
-  "premia":                 "https://app.premia.finance/vaults",
-  "umami-finance":          "https://umami.finance/vaults",
+function cid(chain: string): number | null {
+  return CHAIN_ID[chain] ?? null
+}
 
-  // ── Real World Assets / CDP ──────────────────────────────────────────
-  "ondo-finance":           "https://ondo.finance/ousg",
-  "makerdao":               "https://app.spark.fi/",
-  "sky":                    "https://app.sky.money/",
-  "frax":                   "https://app.frax.finance/",
-  "liquity":                "https://www.liquity.org/",
-  "liquity-v2":             "https://www.liquity.org/",
-  "angle":                  "https://app.angle.money/",
-  "reserve":                "https://app.reserve.org/",
-
-  // ── Solana ───────────────────────────────────────────────────────────
-  "kamino":                 "https://app.kamino.finance/",
-  "kamino-lend":            "https://app.kamino.finance/lend",
-  "marginfi":               "https://app.marginfi.com/lend",
-  "solend":                 "https://solend.fi/dashboard",
-  "drift":                  "https://app.drift.trade/vaults",
-  "save":                   "https://save.finance/",
-  "meteora":                "https://app.meteora.ag/pools",
-  "lifinity":               "https://lifinity.io/pools",
-  "hawksight":              "https://app.hawksight.co/",
-
-  // ── Bitcoin L2 / other ───────────────────────────────────────────────
-  "lombard":                "https://app.lombard.finance/",
-  "bedrock":                "https://app.bedrock.technology/",
-  "pstake":                 "https://pstake.finance/",
-  "stroom":                 "https://stroom.network/",
+/** Returns true if str looks like an EVM contract address */
+function isAddr(str: string): boolean {
+  return /^0x[0-9a-fA-F]{40}$/.test(str)
 }
 
 /**
- * Returns the direct deposit/app URL for a protocol.
- * Falls back to the DefiLlama pool page if the protocol is unknown.
+ * Returns the best possible direct URL for depositing into a specific pool.
+ * Attempts a deep link using pool address / chain / token addresses.
+ * Falls back to the DefiLlama pool page when no direct URL can be built.
  */
-export function getProtocolUrl(project: string, poolId: string): string {
-  return PROTOCOL_URLS[project] ?? `https://defillama.com/yields/pool/${poolId}`
-}
+export function getPoolDirectUrl(pool: Pool): string {
+  const { project, chain, pool: pid, underlyingTokens } = pool
+  const chainSlug = s(chain)
+  const chainId  = cid(chain)
+  const addr     = isAddr(pid)
+  const tok0     = underlyingTokens?.[0]
 
-/**
- * Returns true when we have a known direct URL (not a DefiLlama fallback).
- */
-export function hasDirectUrl(project: string): boolean {
-  return project in PROTOCOL_URLS
+  // ── Uniswap V3 / V2 ────────────────────────────────────────────────
+  if (project === "uniswap-v3" && addr)
+    return `https://app.uniswap.org/explore/pools/${chainSlug}/${pid}`
+  if (project === "uniswap-v2" && addr)
+    return `https://app.uniswap.org/explore/pools/${chainSlug}/${pid}`
+
+  // ── Aave V3 / V2 ───────────────────────────────────────────────────
+  if (project === "aave-v3") {
+    const market = AAVE_MARKET[chain]
+    if (market && tok0)
+      return `https://app.aave.com/reserve-overview/?underlyingAsset=${tok0}&marketName=proto_${market}_v3`
+    return "https://app.aave.com/"
+  }
+  if (project === "aave-v2") {
+    const market = AAVE_MARKET[chain]
+    if (market && tok0)
+      return `https://app.aave.com/reserve-overview/?underlyingAsset=${tok0}&marketName=proto_${market}_v2`
+    return "https://app.aave.com/"
+  }
+
+  // ── Compound V3 / V2 ───────────────────────────────────────────────
+  if (project === "compound-v3") return "https://app.compound.finance/"
+  if (project === "compound-v2") return "https://app.compound.finance/"
+
+  // ── Curve ──────────────────────────────────────────────────────────
+  if (project === "curve" || project === "curve-dex") {
+    if (addr) return `https://curve.fi/#/${chainSlug}/pools/${pid}/deposit`
+    return `https://curve.fi/#/${chainSlug}/pools`
+  }
+
+  // ── Balancer V2 ────────────────────────────────────────────────────
+  if (project === "balancer" || project === "balancer-v2") {
+    if (addr) return `https://balancer.fi/pools/${chainSlug}/v2/${pid}`
+    return "https://balancer.fi/"
+  }
+
+  // ── Pendle ─────────────────────────────────────────────────────────
+  if (project === "pendle") {
+    if (addr && chainId) return `https://app.pendle.finance/trade/pools/${chainId}/${pid}`
+    return "https://app.pendle.finance/trade/pools"
+  }
+
+  // ── Morpho / Morpho Blue ────────────────────────────────────────────
+  if (project === "morpho" || project === "morpho-blue" || project === "morpho-aave-v3" || project === "morpho-aave-v2" || project === "morpho-compound") {
+    if (addr) return `https://app.morpho.org/vault?vault=${pid}&network=${chainSlug}`
+    return "https://app.morpho.org/"
+  }
+
+  // ── Spark ──────────────────────────────────────────────────────────
+  if (project === "spark") {
+    if (tok0) return `https://app.spark.fi/reserve-overview/?underlyingAsset=${tok0}&marketName=proto_spark_v3`
+    return "https://app.spark.fi/"
+  }
+
+  // ── GMX V1 / V2 ────────────────────────────────────────────────────
+  if (project === "gmx" || project === "gmx-v2") return "https://app.gmx.io/#/earn"
+
+  // ── Velodrome ──────────────────────────────────────────────────────
+  if (project === "velodrome-v2" || project === "velodrome") {
+    if (addr) return `https://app.velodrome.finance/liquidity/manage?address=${pid}`
+    return "https://app.velodrome.finance/liquidity"
+  }
+
+  // ── Aerodrome ──────────────────────────────────────────────────────
+  if (project === "aerodrome") {
+    if (addr) return `https://aerodrome.finance/liquidity/manage?address=${pid}`
+    return "https://aerodrome.finance/liquidity"
+  }
+
+  // ── Camelot V2 / V3 ────────────────────────────────────────────────
+  if (project === "camelot" || project === "camelot-v3") {
+    if (addr) return `https://app.camelot.exchange/pools/${pid}`
+    return "https://app.camelot.exchange/liquidity"
+  }
+
+  // ── SushiSwap ──────────────────────────────────────────────────────
+  if (project === "sushiswap") {
+    if (addr && chainId) return `https://app.sushi.com/pool/${chainId}:${pid}`
+    return "https://app.sushi.com/pool"
+  }
+
+  // ── PancakeSwap V2 / V3 ────────────────────────────────────────────
+  if (project === "pancakeswap" || project === "pancakeswap-v3") {
+    if (addr) return `https://pancakeswap.finance/liquidity/${pid}`
+    return "https://pancakeswap.finance/liquidity"
+  }
+
+  // ── Ramses ─────────────────────────────────────────────────────────
+  if (project === "ramses-v2" || project === "ramses") {
+    if (addr) return `https://www.ramses.exchange/pool/${pid}`
+    return "https://www.ramses.exchange/liquidity"
+  }
+
+  // ── Thena ──────────────────────────────────────────────────────────
+  if (project === "thena") {
+    if (addr) return `https://www.thena.fi/liquidity/${pid}`
+    return "https://www.thena.fi/liquidity"
+  }
+
+  // ── Trader Joe V1 / V2 ─────────────────────────────────────────────
+  if (project === "trader-joe" || project === "trader-joe-v2") {
+    if (addr) return `https://traderjoexyz.com/${chainSlug}/pool/v21/${pid}`
+    return "https://traderjoexyz.com/pool"
+  }
+
+  // ── KyberSwap ──────────────────────────────────────────────────────
+  if (project === "kyberswap" || project === "kyberswap-elastic") {
+    if (addr) return `https://kyberswap.com/${chainSlug}/elastic/remove/${pid}`
+    return "https://kyberswap.com/pools"
+  }
+
+  // ── Euler V1 / V2 ──────────────────────────────────────────────────
+  if (project === "euler" || project === "euler-v2") {
+    if (addr) return `https://app.euler.finance/vault/${pid}?network=${chainSlug}`
+    return "https://app.euler.finance/"
+  }
+
+  // ── Silo Finance ───────────────────────────────────────────────────
+  if (project === "silo-finance" || project === "silo-v2") {
+    if (addr) return `https://app.silo.finance/${chainSlug}/${pid}`
+    return "https://app.silo.finance/"
+  }
+
+  // ── Kamino (Solana) ────────────────────────────────────────────────
+  if (project === "kamino") {
+    if (addr) return `https://app.kamino.finance/liquidity/${pid}`
+    return "https://app.kamino.finance/"
+  }
+  if (project === "kamino-lend") return "https://app.kamino.finance/lend"
+
+  // ── Orca (Solana) ──────────────────────────────────────────────────
+  if (project === "orca") {
+    if (addr) return `https://www.orca.so/pools?q=${pid}`
+    return "https://www.orca.so/pools"
+  }
+
+  // ── Meteora (Solana) ───────────────────────────────────────────────
+  if (project === "meteora") {
+    if (addr) return `https://app.meteora.ag/pools/${pid}`
+    return "https://app.meteora.ag/pools"
+  }
+
+  // ── Yearn Finance ──────────────────────────────────────────────────
+  if (project === "yearn-finance") {
+    if (addr && chainId) return `https://yearn.fi/vaults/${chainId}/${pid}`
+    return "https://yearn.fi/vaults"
+  }
+
+  // ── Convex ─────────────────────────────────────────────────────────
+  if (project === "convex-finance") return "https://www.convexfinance.com/stake"
+
+  // ── Lido ───────────────────────────────────────────────────────────
+  if (project === "lido") return "https://stake.lido.fi/"
+
+  // ── Rocket Pool ────────────────────────────────────────────────────
+  if (project === "rocket-pool") return "https://stake.rocketpool.net/"
+
+  // ── Stargate ───────────────────────────────────────────────────────
+  if (project === "stargate" || project === "stargate-v2")
+    return "https://stargate.finance/pool"
+
+  // ── Hop ────────────────────────────────────────────────────────────
+  if (project === "hop-protocol") return "https://app.hop.exchange/#/pool"
+
+  // ── Across ─────────────────────────────────────────────────────────
+  if (project === "across-protocol") return "https://across.to/pool"
+
+  // ── Synapse ────────────────────────────────────────────────────────
+  if (project === "synapse") return "https://synapseprotocol.com/pools"
+
+  // ── Wombat ─────────────────────────────────────────────────────────
+  if (project === "wombat-exchange") return "https://app.wombat.exchange/pool"
+
+  // ── Aura ───────────────────────────────────────────────────────────
+  if (project === "aura") return "https://app.aura.finance/"
+
+  // ── Beefy ──────────────────────────────────────────────────────────
+  if (project === "beefy") return "https://app.beefy.com/"
+
+  // ── Gearbox ────────────────────────────────────────────────────────
+  if (project === "gearbox") return "https://app.gearbox.fi/"
+
+  // ── Fluid ──────────────────────────────────────────────────────────
+  if (project === "fluid") return "https://fluid.instadapp.io/"
+
+  // ── Ionic ──────────────────────────────────────────────────────────
+  if (project === "ionic-protocol") return "https://app.ionic.money/"
+
+  // ── Seamless ───────────────────────────────────────────────────────
+  if (project === "seamless-protocol") return "https://app.seamlessprotocol.com/"
+
+  // ── Radiant ────────────────────────────────────────────────────────
+  if (project === "radiant-v2" || project === "radiant-v1")
+    return "https://app.radiant.capital/"
+
+  // ── Benqi ──────────────────────────────────────────────────────────
+  if (project === "benqi") return "https://app.benqi.fi/markets"
+
+  // ── Venus ──────────────────────────────────────────────────────────
+  if (project === "venus") return "https://app.venus.io/markets"
+
+  // ── MakerDAO / Sky ─────────────────────────────────────────────────
+  if (project === "makerdao" || project === "sky") return "https://app.sky.money/"
+
+  // ── Frax ───────────────────────────────────────────────────────────
+  if (project === "frax" || project === "frax-ether" || project === "fraxlend")
+    return "https://app.frax.finance/"
+
+  // ── Pendle (already handled above) — notional ──────────────────────
+  if (project === "notional-v2" || project === "notional-v3")
+    return "https://notional.finance/"
+
+  // ── Extra Finance ──────────────────────────────────────────────────
+  if (project === "extra-finance") return "https://app.extrafi.io/farm"
+
+  // ── Overnight ──────────────────────────────────────────────────────
+  if (project === "overnight-fi") return "https://overnight.fi/app"
+
+  // ── Ondo ───────────────────────────────────────────────────────────
+  if (project === "ondo-finance") return "https://ondo.finance/"
+
+  // ── Maple ──────────────────────────────────────────────────────────
+  if (project === "maple") return "https://app.maple.finance/"
+
+  // ── Clearpool ──────────────────────────────────────────────────────
+  if (project === "clearpool") return "https://clearpool.finance/"
+
+  // ── marginfi ───────────────────────────────────────────────────────
+  if (project === "marginfi") return "https://app.marginfi.com/lend"
+
+  // ── Solend ─────────────────────────────────────────────────────────
+  if (project === "solend") return "https://solend.fi/dashboard"
+
+  // ── Drift ──────────────────────────────────────────────────────────
+  if (project === "drift") return "https://app.drift.trade/vaults"
+
+  // ── Ambient ────────────────────────────────────────────────────────
+  if (project === "ambient-finance") return "https://ambient.finance/pool"
+
+  // ── Dolomite ───────────────────────────────────────────────────────
+  if (project === "dolomite") return "https://app.dolomite.io/"
+
+  // ── Equilibria ─────────────────────────────────────────────────────
+  if (project === "equilibria") return "https://equilibria.fi/pool"
+
+  // ── Gains / gTrade ─────────────────────────────────────────────────
+  if (project === "gains-network") return "https://gains.trade/vaults"
+
+  // ── Fenix ──────────────────────────────────────────────────────────
+  if (project === "fenix") {
+    if (addr) return `https://www.fenixfinance.io/pool/${pid}`
+    return "https://www.fenixfinance.io/liquidity"
+  }
+
+  // ── Lynex ──────────────────────────────────────────────────────────
+  if (project === "lynex") return "https://app.lynex.fi/liquidity"
+
+  // ── Retro ──────────────────────────────────────────────────────────
+  if (project === "retro") {
+    if (addr) return `https://retro.finance/pool/${pid}`
+    return "https://retro.finance/liquidity"
+  }
+
+  // ── Pearl ──────────────────────────────────────────────────────────
+  if (project === "pearl") return "https://www.pearl.exchange/liquidity"
+
+  // ── Default: DefiLlama fallback ────────────────────────────────────
+  return `https://defillama.com/yields/pool/${pid}`
 }

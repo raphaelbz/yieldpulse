@@ -3,7 +3,7 @@
 import { useRef, useMemo, useCallback } from "react"
 import { useRouter } from "next/navigation"
 import { useVirtualizer } from "@tanstack/react-virtual"
-import { Star, GitCompare, ChevronUp, ChevronDown, ChevronsUpDown } from "lucide-react"
+import { Star, GitCompare, ChevronUp, ChevronDown, ChevronsUpDown, ExternalLink } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
@@ -134,6 +134,24 @@ function PoolRow({ pool }: { pool: Pool }) {
 
       {/* Actions */}
       <div className="flex items-center justify-end gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity duration-150" onClick={(e) => e.stopPropagation()}>
+        <Tooltip>
+          <TooltipTrigger
+            className="inline-flex items-center justify-center h-7 w-7 rounded-lg transition-all duration-150 text-zinc-600 hover:text-zinc-300 hover:bg-white/[0.05] p-0"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <a
+              href={`https://defillama.com/yields/pool/${pool.pool}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="inline-flex items-center justify-center w-full h-full"
+            >
+              <ExternalLink className="h-3.5 w-3.5" />
+            </a>
+          </TooltipTrigger>
+          <TooltipContent side="top">View on DefiLlama</TooltipContent>
+        </Tooltip>
+
         <Tooltip>
           <TooltipTrigger
             className={cn(

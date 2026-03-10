@@ -13,6 +13,7 @@ import type {
   MinTvlOption,
   SortDirection,
   SortField,
+  TrackedWallet,
   ViewMode,
   WatchlistEntry,
 } from "@/types"
@@ -85,6 +86,12 @@ interface AppState {
   // Last data refresh timestamp
   lastRefreshedAt: number | null
   setLastRefreshedAt: (ts: number) => void
+
+  // Wallets
+  wallets: TrackedWallet[]
+  addWallet: (wallet: TrackedWallet) => void
+  removeWallet: (id: string) => void
+  updateWallet: (id: string, patch: Partial<Omit<TrackedWallet, "id">>) => void
 }
 
 // ------ Store Implementation ------
@@ -174,6 +181,17 @@ export const useAppStore = create<AppState>()(
       // ── Refresh timestamp ────────────────────────────────────
       lastRefreshedAt: null,
       setLastRefreshedAt: (ts) => set({ lastRefreshedAt: ts }),
+
+      // ── Wallets ──────────────────────────────────────────────
+      wallets: [],
+      addWallet: (wallet) =>
+        set((state) => ({ wallets: [...state.wallets, wallet] })),
+      removeWallet: (id) =>
+        set((state) => ({ wallets: state.wallets.filter((w) => w.id !== id) })),
+      updateWallet: (id, patch) =>
+        set((state) => ({
+          wallets: state.wallets.map((w) => (w.id === id ? { ...w, ...patch } : w)),
+        })),
     }),
     {
       name: LS_KEYS.filters,
@@ -183,6 +201,7 @@ export const useAppStore = create<AppState>()(
         watchlist: state.watchlist,
         alerts: state.alerts,
         alertHistory: state.alertHistory,
+        wallets: state.wallets,
       }),
     }
   )

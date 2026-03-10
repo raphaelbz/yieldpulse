@@ -12,6 +12,7 @@ const NAV_LINKS = [
   { href: "/watchlist", label: "Watchlist" },
   { href: "/alerts", label: "Alerts" },
   { href: "/compare", label: "Compare" },
+  { href: "/portfolio", label: "Portfolio" },
 ]
 
 export function Navbar() {

@@ -20,13 +20,13 @@ export function Footer() {
 
           {/* Nav links */}
           <nav className="flex items-center gap-5">
-            {["/", "/watchlist", "/alerts", "/compare"].map((href, i) => (
+            {["/", "/watchlist", "/alerts", "/compare", "/portfolio"].map((href, i) => (
               <Link
                 key={href}
                 href={href}
                 className="text-xs text-zinc-600 hover:text-zinc-300 transition-colors duration-150"
               >
-                {["Dashboard", "Watchlist", "Alerts", "Compare"][i]}
+                {["Dashboard", "Watchlist", "Alerts", "Compare", "Portfolio"][i]}
               </Link>
             ))}
           </nav>

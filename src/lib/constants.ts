@@ -84,4 +84,5 @@ export const LS_KEYS = {
   alerts: "yieldpulse:alerts",
   alertHistory: "yieldpulse:alertHistory",
   filters: "yieldpulse:filters",
+  wallets: "yieldpulse:wallets",
 }

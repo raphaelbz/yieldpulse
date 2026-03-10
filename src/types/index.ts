@@ -155,3 +155,23 @@ export interface ChainMap {
 // ------ Formatting ------
 
 export type TimeRange = "7d" | "30d" | "90d" | "1y"
+
+// ------ Wallet Portfolio ------
+
+export type WalletType = "evm" | "btc"
+
+export interface TrackedWallet {
+  id: string           // generateId()
+  address: string
+  type: WalletType
+  label: string        // user-provided nickname
+  addedAt: string      // ISO date
+}
+
+export interface WalletBalance {
+  walletId: string
+  nativeBalance: number    // ETH in ether or BTC in BTC (not satoshi/wei)
+  usdValue: number | null
+  lastFetchedAt: number    // timestamp
+  error: string | null
+}

@@ -137,6 +137,19 @@ export function PoolHeader({ pool }: PoolHeaderProps) {
 
             {/* Action buttons */}
             <div className="flex items-center gap-2">
+              <a
+                href={`https://defillama.com/yields/pool/${pool.pool}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={cn(
+                  buttonVariants({ variant: "outline", size: "sm" }),
+                  "h-8 text-xs border-zinc-700 bg-zinc-800 hover:bg-zinc-700 text-zinc-400"
+                )}
+              >
+                <ExternalLink className="h-3.5 w-3.5 mr-1.5" />
+                DefiLlama
+              </a>
+
               <Button
                 variant="outline"
                 size="sm"

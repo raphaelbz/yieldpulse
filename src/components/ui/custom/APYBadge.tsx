@@ -15,14 +15,14 @@ export function APYBadge({ apy, className, size = "md" }: APYBadgeProps) {
   return (
     <span
       className={cn(
-        "inline-flex items-center font-mono tabular-nums font-semibold rounded-md px-1.5 py-0.5",
+        "inline-flex items-center font-mono tabular-nums font-semibold rounded-lg px-1.5 py-0.5",
         size === "sm" && "text-xs",
         size === "md" && "text-sm",
-        size === "lg" && "text-xl",
-        isNull && "text-zinc-600 bg-transparent",
-        isNegative && "text-red-400 bg-red-500/[0.08]",
-        isHigh && "text-green-300 bg-green-500/[0.1]",
-        !isNull && !isNegative && !isHigh && "text-green-400 bg-green-500/[0.08]",
+        size === "lg" && "text-2xl font-bold px-2.5 py-1",
+        isNull && "text-slate-600 bg-transparent",
+        isNegative && "text-red-400 bg-red-500/[0.08] border border-red-500/[0.12]",
+        isHigh && "text-emerald-300 bg-emerald-500/[0.12] border border-emerald-500/[0.2] shadow-[0_0_8px_rgba(52,211,153,0.15)]",
+        !isNull && !isNegative && !isHigh && "text-emerald-400 bg-emerald-500/[0.08] border border-emerald-500/[0.12]",
         className
       )}
     >

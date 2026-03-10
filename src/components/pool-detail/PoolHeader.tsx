@@ -43,7 +43,7 @@ export function PoolHeader({ pool }: PoolHeaderProps) {
         href="/"
         className={cn(
           buttonVariants({ variant: "ghost", size: "sm" }),
-          "h-8 text-xs text-zinc-500 hover:text-white px-2 -ml-2"
+          "h-8 text-xs text-slate-500 hover:text-white px-2 -ml-2"
         )}
       >
         <ArrowLeft className="h-3.5 w-3.5 mr-1" />
@@ -51,7 +51,7 @@ export function PoolHeader({ pool }: PoolHeaderProps) {
       </Link>
 
       {/* Main header card */}
-      <div className="rounded-xl border border-white/[0.07] bg-[#1c1c1e] p-6">
+      <div className="rounded-xl border border-[rgba(99,135,255,0.12)] bg-[#090d18] p-6 shadow-[0_4px_32px_rgba(0,0,0,0.4)]" style={{ background: "linear-gradient(135deg, #090d18 0%, #0e1525 100%)" }}>
         <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
 
           {/* Left: Identity */}
@@ -72,7 +72,7 @@ export function PoolHeader({ pool }: PoolHeaderProps) {
                   </Badge>
                 )}
                 {pool.exposure === "single" && (
-                  <Badge className="bg-green-500/10 text-green-400 border-green-500/20 text-xs">
+                  <Badge className="bg-emerald-500/10 text-emerald-400 border-emerald-500/20 text-xs">
                     Single asset
                   </Badge>
                 )}
@@ -80,24 +80,24 @@ export function PoolHeader({ pool }: PoolHeaderProps) {
               </div>
 
               <div className="flex items-center gap-3 mt-1.5 flex-wrap">
-                <span className="flex items-center gap-1.5 text-sm text-zinc-400">
+                <span className="flex items-center gap-1.5 text-sm text-slate-400">
                   <ProtocolLogo project={pool.project} size={14} />
                   {formatProtocolName(pool.project)}
                 </span>
-                <span className="text-zinc-700">·</span>
-                <span className="flex items-center gap-1.5 text-sm text-zinc-400">
+                <span className="text-slate-700">·</span>
+                <span className="flex items-center gap-1.5 text-sm text-slate-400">
                   <ChainLogo chain={pool.chain} size={14} />
                   {pool.chain}
                 </span>
                 {pool.poolMeta && (
                   <>
-                    <span className="text-zinc-700">·</span>
-                    <span className="text-sm text-zinc-500">{pool.poolMeta}</span>
+                    <span className="text-slate-700">·</span>
+                    <span className="text-sm text-slate-500">{pool.poolMeta}</span>
                   </>
                 )}
               </div>
 
-              <p className="text-xs text-zinc-600 mt-2 font-mono">{pool.pool}</p>
+              <p className="text-xs text-slate-700 mt-2 font-mono">{pool.pool}</p>
             </div>
           </div>
 
@@ -105,13 +105,13 @@ export function PoolHeader({ pool }: PoolHeaderProps) {
           <div className="flex flex-col items-start lg:items-end gap-4">
             {/* Main APY */}
             <div className="text-right">
-              <p className="text-xs text-zinc-500 uppercase tracking-wide mb-1">Total APY</p>
+              <p className="text-xs text-slate-500 uppercase tracking-wide mb-1">Total APY</p>
               <APYBadge apy={pool.apy} size="lg" />
               <div className="flex items-center gap-3 mt-1 justify-end">
-                <span className="text-xs text-zinc-500">
+                <span className="text-xs text-slate-500">
                   Base <APYBadge apy={pool.apyBase} size="sm" />
                 </span>
-                <span className="text-xs text-zinc-500">
+                <span className="text-xs text-slate-500">
                   Reward <APYBadge apy={pool.apyReward} size="sm" />
                 </span>
               </div>
@@ -120,19 +120,19 @@ export function PoolHeader({ pool }: PoolHeaderProps) {
             {/* TVL + changes */}
             <div className="flex items-center gap-4 text-right">
               <div>
-                <p className="text-xs text-zinc-500">TVL</p>
-                <p className="text-sm font-mono font-semibold text-zinc-200">{formatTVL(pool.tvlUsd)}</p>
+                <p className="text-xs text-slate-500">TVL</p>
+                <p className="text-sm font-mono font-semibold text-slate-200">{formatTVL(pool.tvlUsd)}</p>
               </div>
               <div>
-                <p className="text-xs text-zinc-500">24h</p>
+                <p className="text-xs text-slate-500">24h</p>
                 <APYChange value={pool.apyPct1D} />
               </div>
               <div>
-                <p className="text-xs text-zinc-500">7d</p>
+                <p className="text-xs text-slate-500">7d</p>
                 <APYChange value={pool.apyPct7D} />
               </div>
               <div>
-                <p className="text-xs text-zinc-500">30d</p>
+                <p className="text-xs text-slate-500">30d</p>
                 <APYChange value={pool.apyPct30D} />
               </div>
             </div>
@@ -145,7 +145,7 @@ export function PoolHeader({ pool }: PoolHeaderProps) {
                 rel="noopener noreferrer"
                 className={cn(
                   buttonVariants({ variant: "outline", size: "sm" }),
-                  "h-8 text-xs border-zinc-700 bg-zinc-800 hover:bg-zinc-700 text-zinc-400"
+                  "h-8 text-xs border-[rgba(99,135,255,0.2)] bg-[rgba(255,255,255,0.03)] hover:bg-[rgba(255,255,255,0.06)] text-slate-400"
                 )}
               >
                 <ExternalLink className="h-3.5 w-3.5 mr-1.5" />
@@ -157,8 +157,8 @@ export function PoolHeader({ pool }: PoolHeaderProps) {
                 size="sm"
                 onClick={() => isWatched ? removeFromWatchlist(pool.pool) : addToWatchlist(pool.pool)}
                 className={cn(
-                  "h-8 text-xs border-zinc-700 bg-zinc-800 hover:bg-zinc-700",
-                  isWatched ? "text-amber-400 border-amber-500/30" : "text-zinc-400"
+                  "h-8 text-xs border-[rgba(99,135,255,0.2)] bg-[rgba(255,255,255,0.03)] hover:bg-[rgba(255,255,255,0.06)]",
+                  isWatched ? "text-amber-400 border-amber-500/30" : "text-slate-400"
                 )}
               >
                 <Star className={cn("h-3.5 w-3.5 mr-1.5", isWatched && "fill-current")} />
@@ -171,8 +171,8 @@ export function PoolHeader({ pool }: PoolHeaderProps) {
                 onClick={() => isCompared ? removeFromCompare(pool.pool) : addToCompare(pool.pool)}
                 disabled={!canCompare}
                 className={cn(
-                  "h-8 text-xs border-zinc-700 bg-zinc-800 hover:bg-zinc-700",
-                  isCompared ? "text-green-400 border-green-500/30" : "text-zinc-400"
+                  "h-8 text-xs border-[rgba(99,135,255,0.2)] bg-[rgba(255,255,255,0.03)] hover:bg-[rgba(255,255,255,0.06)]",
+                  isCompared ? "text-emerald-400 border-emerald-500/30" : "text-slate-400"
                 )}
               >
                 <GitCompare className="h-3.5 w-3.5 mr-1.5" />
@@ -189,19 +189,19 @@ export function PoolHeader({ pool }: PoolHeaderProps) {
 export function PoolHeaderSkeleton() {
   return (
     <div className="space-y-4">
-      <Skeleton className="h-8 w-36 bg-zinc-800" />
-      <div className="rounded-xl border border-white/[0.07] bg-[#1c1c1e] p-6">
+      <Skeleton className="h-8 w-36 bg-white/[0.05]" />
+      <div className="rounded-xl border border-[rgba(99,135,255,0.12)] bg-[#090d18] p-6">
         <div className="flex items-start gap-4">
-          <Skeleton className="h-12 w-12 rounded-xl bg-zinc-800 shrink-0" />
+          <Skeleton className="h-12 w-12 rounded-xl bg-white/[0.05] shrink-0" />
           <div className="flex-1 space-y-2">
-            <Skeleton className="h-7 w-48 bg-zinc-800" />
-            <Skeleton className="h-4 w-36 bg-zinc-800" />
-            <Skeleton className="h-3 w-72 bg-zinc-800" />
+            <Skeleton className="h-7 w-48 bg-white/[0.05]" />
+            <Skeleton className="h-4 w-36 bg-white/[0.04]" />
+            <Skeleton className="h-3 w-72 bg-white/[0.03]" />
           </div>
           <div className="hidden lg:flex flex-col items-end gap-3">
-            <Skeleton className="h-10 w-28 bg-zinc-800" />
-            <Skeleton className="h-4 w-40 bg-zinc-800" />
-            <Skeleton className="h-8 w-32 bg-zinc-800" />
+            <Skeleton className="h-10 w-28 bg-white/[0.05]" />
+            <Skeleton className="h-4 w-40 bg-white/[0.04]" />
+            <Skeleton className="h-8 w-32 bg-white/[0.04]" />
           </div>
         </div>
       </div>

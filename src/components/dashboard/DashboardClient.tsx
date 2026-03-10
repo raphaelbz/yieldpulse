@@ -47,8 +47,10 @@ export function DashboardClient() {
 
         {/* Page header */}
         <div>
-          <h1 className="text-xl font-semibold text-white tracking-tight">Yield Markets</h1>
-          <p className="text-sm text-zinc-500 mt-0.5">
+          <h1 className="text-2xl font-bold tracking-tight bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
+            Yield Markets
+          </h1>
+          <p className="text-sm text-slate-500 mt-1">
             {isLoading
               ? "Loading pools…"
               : `${totalPools.toLocaleString()} pools across DeFi`}

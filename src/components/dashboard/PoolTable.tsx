@@ -50,7 +50,7 @@ function SortHeader({ col }: { col: Column }) {
   if (!col.sortable) {
     return (
       <span className={cn(
-        "text-[11px] font-medium text-zinc-600 uppercase tracking-widest",
+        "text-[11px] font-medium text-slate-600 uppercase tracking-widest",
         col.align === "right" && "text-right block"
       )}>
         {col.label}
@@ -64,7 +64,7 @@ function SortHeader({ col }: { col: Column }) {
       className={cn(
         "flex items-center gap-1 text-[11px] font-medium uppercase tracking-widest transition-colors duration-150 hover:text-white cursor-pointer",
         col.align === "right" && "ml-auto",
-        isActive ? "text-green-400" : "text-zinc-600"
+        isActive ? "text-emerald-400" : "text-slate-600"
       )}
     >
       {col.label}
@@ -96,9 +96,9 @@ function PoolRow({ pool }: { pool: Pool }) {
     <div
       onClick={() => router.push(`/pool/${pool.pool}`)}
       className={cn(
-        "grid items-center gap-4 px-4 h-full border-b border-white/[0.04] last:border-0",
-        "hover:bg-white/[0.03] cursor-pointer transition-colors duration-150 group",
-        isCompared && "bg-green-500/[0.05]"
+        "grid items-center gap-4 px-4 h-full border-b border-[rgba(99,135,255,0.05)] last:border-0",
+        "hover:bg-[rgba(99,135,255,0.04)] cursor-pointer transition-all duration-150 group",
+        isCompared && "bg-emerald-500/[0.05] border-emerald-500/[0.08]"
       )}
       style={{ gridTemplateColumns: GRID }}
       role="row"
@@ -112,8 +112,8 @@ function PoolRow({ pool }: { pool: Pool }) {
           </div>
         </div>
         <div className="min-w-0">
-          <p className="text-sm font-medium text-zinc-100 truncate group-hover:text-white transition-colors">{pool.symbol}</p>
-          <p className="text-[11px] text-zinc-600 truncate">{formatProtocolName(pool.project)}</p>
+          <p className="text-sm font-medium text-slate-200 truncate group-hover:text-white transition-colors">{pool.symbol}</p>
+          <p className="text-[11px] text-slate-600 truncate">{formatProtocolName(pool.project)}</p>
         </div>
       </div>
 
@@ -125,7 +125,7 @@ function PoolRow({ pool }: { pool: Pool }) {
       <div className="text-right"><APYBadge apy={pool.apyReward} size="sm" /></div>
       {/* TVL */}
       <div className="text-right">
-        <span className="text-sm font-mono tabular-nums text-zinc-400">{formatTVL(pool.tvlUsd)}</span>
+        <span className="text-sm font-mono tabular-nums text-slate-400">{formatTVL(pool.tvlUsd)}</span>
       </div>
       {/* 7d change */}
       <div className="text-right"><APYChange value={pool.apyPct7D} /></div>
@@ -138,7 +138,7 @@ function PoolRow({ pool }: { pool: Pool }) {
       <div className="flex items-center justify-end gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity duration-150" onClick={(e) => e.stopPropagation()}>
         <Tooltip>
           <TooltipTrigger
-            className="inline-flex items-center justify-center h-7 w-7 rounded-lg transition-all duration-150 text-zinc-600 hover:text-zinc-300 hover:bg-white/[0.05] p-0"
+            className="inline-flex items-center justify-center h-7 w-7 rounded-lg transition-all duration-150 text-slate-600 hover:text-slate-300 hover:bg-white/[0.05] p-0"
             onClick={(e) => e.stopPropagation()}
           >
             <a
@@ -160,7 +160,7 @@ function PoolRow({ pool }: { pool: Pool }) {
               "inline-flex items-center justify-center h-7 w-7 rounded-lg transition-all duration-150 cursor-pointer",
               isWatched
                 ? "text-amber-400 bg-amber-500/[0.08] hover:bg-amber-500/[0.12]"
-                : "text-zinc-600 hover:text-zinc-300 hover:bg-white/[0.05]"
+                : "text-slate-600 hover:text-slate-300 hover:bg-white/[0.05]"
             )}
             onClick={(e) => {
               e.stopPropagation()
@@ -179,8 +179,8 @@ function PoolRow({ pool }: { pool: Pool }) {
             className={cn(
               "inline-flex items-center justify-center h-7 w-7 rounded-lg transition-all duration-150",
               isCompared
-                ? "text-green-400 bg-green-500/[0.08] hover:bg-green-500/[0.12]"
-                : "text-zinc-600 hover:text-zinc-300 hover:bg-white/[0.05]",
+                ? "text-emerald-400 bg-emerald-500/[0.08] hover:bg-emerald-500/[0.12]"
+                : "text-slate-600 hover:text-slate-300 hover:bg-white/[0.05]",
               !canCompare && "opacity-30 cursor-not-allowed"
             )}
             disabled={!canCompare}
@@ -202,21 +202,21 @@ function PoolRow({ pool }: { pool: Pool }) {
 
 function TableSkeleton() {
   return (
-    <div className="rounded-2xl border border-white/[0.06] bg-[#000000] overflow-hidden">
-      <div className="grid gap-4 px-4 py-3.5 border-b border-white/[0.05]" style={{ gridTemplateColumns: GRID }}>
-        {COLUMNS.map((col) => <Skeleton key={col.key} className="h-2.5 w-12 bg-white/[0.06]" />)}
+    <div className="rounded-2xl border border-[rgba(99,135,255,0.1)] bg-[#090d18] overflow-hidden">
+      <div className="grid gap-4 px-4 py-3.5 border-b border-[rgba(99,135,255,0.07)]" style={{ gridTemplateColumns: GRID }}>
+        {COLUMNS.map((col) => <Skeleton key={col.key} className="h-2.5 w-12 bg-white/[0.05]" />)}
       </div>
       {Array.from({ length: 12 }).map((_, i) => (
-        <div key={i} className="grid gap-4 px-4 py-3.5 border-b border-white/[0.04]" style={{ gridTemplateColumns: GRID }}>
+        <div key={i} className="grid gap-4 px-4 py-3.5 border-b border-[rgba(99,135,255,0.05)]" style={{ gridTemplateColumns: GRID }}>
           <div className="flex items-center gap-2.5">
-            <Skeleton className="h-6 w-6 rounded-lg bg-white/[0.06]" />
+            <Skeleton className="h-6 w-6 rounded-lg bg-white/[0.05]" />
             <div className="space-y-1.5">
-              <Skeleton className="h-3 w-20 bg-white/[0.06]" />
-              <Skeleton className="h-2.5 w-14 bg-white/[0.04]" />
+              <Skeleton className="h-3 w-20 bg-white/[0.05]" />
+              <Skeleton className="h-2.5 w-14 bg-white/[0.03]" />
             </div>
           </div>
           {Array.from({ length: COLUMNS.length - 1 }).map((_, j) => (
-            <Skeleton key={j} className="h-4 w-14 ml-auto bg-white/[0.05]" />
+            <Skeleton key={j} className="h-4 w-14 ml-auto bg-white/[0.04]" />
           ))}
         </div>
       ))}
@@ -226,14 +226,14 @@ function TableSkeleton() {
 
 function EmptyState({ onReset }: { onReset: () => void }) {
   return (
-    <div className="rounded-2xl border border-white/[0.07] bg-[#000000] flex flex-col items-center justify-center py-20 text-center">
-      <div className="h-12 w-12 rounded-2xl bg-white/[0.04] border border-white/[0.06] flex items-center justify-center mb-4">
-        <ChevronsUpDown className="h-5 w-5 text-zinc-600" />
+    <div className="rounded-2xl border border-[rgba(99,135,255,0.1)] bg-[#090d18] flex flex-col items-center justify-center py-20 text-center">
+      <div className="h-12 w-12 rounded-2xl bg-white/[0.03] border border-[rgba(99,135,255,0.1)] flex items-center justify-center mb-4">
+        <ChevronsUpDown className="h-5 w-5 text-slate-600" />
       </div>
-      <p className="text-zinc-300 font-medium mb-1">No pools match your filters</p>
-      <p className="text-zinc-600 text-sm mb-5">Try adjusting the criteria</p>
+      <p className="text-slate-300 font-medium mb-1">No pools match your filters</p>
+      <p className="text-slate-600 text-sm mb-5">Try adjusting the criteria</p>
       <Button variant="outline" size="sm" onClick={onReset}
-        className="border-white/[0.1] bg-white/[0.04] text-zinc-300 hover:bg-white/[0.07] hover:text-white text-xs h-8">
+        className="border-[rgba(99,135,255,0.15)] bg-white/[0.03] text-slate-300 hover:bg-white/[0.06] hover:text-white text-xs h-8">
         Reset filters
       </Button>
     </div>
@@ -260,10 +260,10 @@ export function PoolTable({ pools, isLoading, onReset }: PoolTableProps) {
   if (!pools.length) return <EmptyState onReset={onReset} />
 
   return (
-    <div className="rounded-2xl border border-white/[0.07] bg-[#000000] overflow-hidden">
+    <div className="rounded-2xl border border-[rgba(99,135,255,0.1)] bg-[#090d18] overflow-hidden shadow-[0_4px_32px_rgba(0,0,0,0.4)]">
       {/* Header */}
       <div
-        className="grid gap-4 px-4 py-3.5 border-b border-white/[0.05] bg-[#1c1c1e]/50"
+        className="grid gap-4 px-4 py-3.5 border-b border-[rgba(99,135,255,0.08)] bg-[#0e1525]/70"
         style={{ gridTemplateColumns: GRID }}
         role="row"
       >
@@ -301,9 +301,9 @@ export function PoolTable({ pools, isLoading, onReset }: PoolTableProps) {
       </div>
 
       {/* Footer */}
-      <div className="px-4 py-2.5 border-t border-white/[0.04] flex items-center justify-between">
-        <span className="text-[11px] text-zinc-700">{pools.length.toLocaleString()} pools</span>
-        <span className="text-[11px] text-zinc-700">Click a row to view details</span>
+      <div className="px-4 py-2.5 border-t border-[rgba(99,135,255,0.06)] flex items-center justify-between bg-[#0e1525]/40">
+        <span className="text-[11px] text-slate-600">{pools.length.toLocaleString()} pools</span>
+        <span className="text-[11px] text-slate-600">Click a row to view details</span>
       </div>
     </div>
   )
